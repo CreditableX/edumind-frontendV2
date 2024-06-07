@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
         password,
         name
       });
-      console.log(response);
+
       if (response.status === 201) {
         // Assuming the API returns the user data upon successful signup
         // do nothing for now
@@ -42,14 +42,11 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
-      // Replace with your actual API endpoint for login
       const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/login', {
         username,
         password
       });
-      console.log("reached here2");
       if (response.status === 200) {
-        console.log("reached here3");
         // Assuming the API returns user data upon successful login
         setUser(response.data.username);
       } else {
