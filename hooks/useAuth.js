@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [chats, setChats] = useState(null);
 
   // signup function
   const signup = async (username, password, name) => {
@@ -66,15 +67,37 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const getChats = async () => {
+    setLoading(true);
+    setError(null); // Clear any previous errors
+    try {
+      // Replace with your actual API endpoint
+      const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/chat');
+      if (response.status === 200) {
+        console.log(response.data);
+        setChats(response.data);
+      } else {
+        throw new Error('Chats failed');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Login error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
         user,
         loading,
         error,
+        chats,
         signup,
         login,
-        logout
+        logout,
+        getChats
       }}
     >
       {children}
