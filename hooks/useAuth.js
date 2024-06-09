@@ -87,6 +87,28 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const newChat = async (subject, header) => {
+    setLoading(true);
+    setError(null); // Clear any previous errors
+    try {
+      const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/chat/new', {
+        subject,
+        header
+      });
+      console.log("newchat called");
+      if (response.status === 201) {
+        console.log("Created new chat");
+      } else {
+        throw new Error('Chat creation failed');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Login error:', err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -97,7 +119,8 @@ export const AuthProvider = ({ children }) => {
         signup,
         login,
         logout,
-        getChats
+        getChats,
+        newChat
       }}
     >
       {children}

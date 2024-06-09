@@ -5,13 +5,14 @@ import { useNavigation } from '@react-navigation/core';
 import useAuth from '../hooks/useAuth';
 import { useState } from 'react';
 import tw from 'twrnc';
-import {AntDesign, Entypo, Ionicons} from '@expo/vector-icons'
+import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons'
+import images from '../assets/images';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const { user, logout } = useAuth();
 
-  console.log('Image source:', require("../assets/edumind.png"));
+  console.log('Image source:', require("../assets/icon.png"));
   const handleLogOut = async () => {
     try {
       await logout();
@@ -27,18 +28,20 @@ const HomeScreen = () => {
         <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
           <Image
             style={tw`h-10 w-10 rounded-full`}
-            source={{ uri: "https://tinder.com/static/tinder.png" }}
+            source={{ uri: "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" }} // change to user image when complete
           />
         </TouchableOpacity>
-        
+
         <TouchableOpacity>
-        <Image style={tw`h-14 w-14`} source={require("../assets/edumind.png")} />
+          <Image
+            style={tw`h-14 w-14`} source={require("../assets/edumind.png")} // see if you can fix, i cant get it to show up
+          />
 
-      </TouchableOpacity>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
-        <Ionicons name='chatbubbles-sharp' size={30}/>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
+          <Ionicons name='chatbubbles-sharp' size={30} />
+        </TouchableOpacity>
       </View>
       {/* End Header */}
 
