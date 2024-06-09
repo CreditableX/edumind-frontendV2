@@ -10,6 +10,9 @@ import useAuth from './hooks/useAuth';
 import { useState } from 'react';
 import StartUpScreen from './screens/StartUpScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import SingleChatScreen from './screens/SingleChatScreen';
+import NewNameScreen from './screens/NewNameScreen';
+import NewUsernameScreen from './screens/NewUsernameScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +37,9 @@ const StackNavigator = () => {
           <Stack.Screen name="Chat" component={ChatScreen} />
           <Stack.Screen name="NewChat" component={NewChatScreen} />
           <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen name="SingleChat" component={SingleChatScreen} />
+          <Stack.Screen name="NewName" component={NewNameScreen} />
+          <Stack.Screen name="NewUsername" component={NewUsernameScreen} />
         </>
       ) : (
         <>

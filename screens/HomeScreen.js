@@ -12,7 +12,6 @@ const HomeScreen = () => {
   const navigation = useNavigation();
   const { user, logout } = useAuth();
 
-  console.log('Image source:', require("../assets/icon.png"));
   const handleLogOut = async () => {
     try {
       await logout();

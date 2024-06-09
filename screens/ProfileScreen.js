@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/core';
 import tw from 'twrnc';
 
 const ProfileScreen = () => {
-    const { user } = useAuth();
+    const { user, updateUsername, updateName } = useAuth();
     const navigation = useNavigation();
 
     return (
@@ -16,8 +16,8 @@ const ProfileScreen = () => {
                 source={{ uri: "https://tinder.com/static/tinder.png" }} // change to user image when complete
             />
             <Text>{user ? `Profile of ${user}` : 'Loading user information...'}</Text>
-            <Button title="Update Username" onPress={() => Alert.alert("not implemented yet")} />
-            <Button title="Update Name" onPress={() => Alert.alert("not implemented yet")} />
+            <Button title="Update Username" onPress={() => navigation.navigate("NewUsername")} />
+            <Button title="Update Name" onPress={() => navigation.navigate("NewName")} />
             <Button title="Home" onPress={() => navigation.navigate('Home')} />
         </SafeAreaView>
     )
