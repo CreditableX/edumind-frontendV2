@@ -4,12 +4,13 @@ import tw from 'twrnc';
 import useAuth from '../hooks/useAuth';
 import { useNavigation } from '@react-navigation/core';
 import { Picker } from '@react-native-picker/picker';
+import useChats from '../hooks/chatProvider';
 
 const NewChatScreen = () => {
     const [subject, setSubject] = useState('');
     const [header, setHeader] = useState('');
     const [question, setQuestion] = useState('');
-    const { newChat } = useAuth();
+    const { newChat } = useChats();
     const navigation = useNavigation();
 
     const handleNewChat = async () => {

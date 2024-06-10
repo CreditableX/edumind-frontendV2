@@ -4,10 +4,11 @@ import { useNavigation } from '@react-navigation/native'
 import useAuth from '../hooks/useAuth'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tw from 'twrnc'
+import useChats from '../hooks/chatProvider'
 
 
 const ChatScreen = () => {
-  const { getChats, chats, updateSingleChatId } = useAuth();
+  const { getChats, chats, updateSingleChatId } = useChats();
   const navigation = useNavigation();
 
   useEffect(() => {

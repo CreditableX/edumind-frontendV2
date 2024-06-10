@@ -4,9 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import useAuth from '../hooks/useAuth'
 import { useNavigation } from '@react-navigation/core';
 import tw from 'twrnc';
+import useUserProfile, { UserProfileProvider } from '../hooks/userProfileProvider';
 
 const ProfileScreen = () => {
-    const { user, updateUsername, updateName } = useAuth();
+    const { user } = useUserProfile();
     const navigation = useNavigation();
 
     return (

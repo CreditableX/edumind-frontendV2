@@ -3,11 +3,12 @@ import { View, Text, TextInput, Button, Alert } from 'react-native';
 import useAuth from '../hooks/useAuth';
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';
+import useUserProfile, { UserProfileProvider } from '../hooks/userProfileProvider';
 
 const NewNameScreen = () => {
     const [name, setName] = useState('');
     const navigation = useNavigation();
-    const { updateName } = useAuth();
+    const { updateName } = useUserProfile();
 
     const handleUpdateName = async (name) => {
         try {
