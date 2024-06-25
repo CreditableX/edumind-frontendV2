@@ -22,7 +22,7 @@ const ChatScreen = () => {
 
   const ChatItem = ({ chat }) => {
     return (
-      <TouchableOpacity onPress={() => moveToSingleChat(chat.id)} style={tw`p-4 border-b border-gray-300`}>
+      <TouchableOpacity onPress={() => moveToSingleChat(chat.chat_id)} style={tw`p-4 border-b border-gray-300`}>
         <View style={tw`p-4 border-b border-gray-300`}>
           <Text style={tw`text-lg font-bold mb-2`}>{chat.header}</Text>
           <Text style={tw`text-base text-gray-700`}>Subject: {chat.subject}</Text>

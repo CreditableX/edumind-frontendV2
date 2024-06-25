@@ -1,4 +1,3 @@
-import { View, Text, Alert } from 'react-native'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 
@@ -6,14 +5,15 @@ const AuthContext = createContext({
 })
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
   const [name, setName] = useState(null);
   const [username, setUsername] = useState(null);
+  const [email, setEmail] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [token, setToken] = useState(null); // Authentication token
 
   // signup function
-  const signup = async (username, password, name) => {
+  const signup = async (username, password, name, email) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
@@ -21,7 +21,8 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/students/register', {
         username,
         password,
-        name
+        name,
+        email
       });
 
       if (response.status === 201) {
@@ -49,12 +50,13 @@ export const AuthProvider = ({ children }) => {
         password
       });
       if (response.status === 200) {
+        console.log("login successful");
         // Assuming the API returns user data upon successful login
-        if (response.data.user_type == 'student') {
-          const r = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/students/profile')
-          setName(r.data.name);
-        }
-        setUser(response.data.username);
+        console.log(response.data.token);
+        setName(response.data.user.name);
+        setUsername(response.data.user.username);
+        setToken(response.data.token);
+        setEmail(response.data.user.email);
       } else {
         throw new Error('Login failed');
       }
@@ -75,7 +77,7 @@ export const AuthProvider = ({ children }) => {
       // Replace with your actual API endpoint
       const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/logout');
       if (response.status === 200) {
-        setUser(null);
+        setUsername(null);
       } else {
         throw new Error('Logout failed');
       }
@@ -91,9 +93,11 @@ export const AuthProvider = ({ children }) => {
 return (
   <AuthContext.Provider
     value={{
-      user,
+      username,
+      name,
       loading,
       error,
+      token,
       signup,
       login,
       logout,

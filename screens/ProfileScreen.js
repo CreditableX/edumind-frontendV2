@@ -4,11 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import useAuth from '../hooks/useAuth'
 import { useNavigation } from '@react-navigation/core';
 import tw from 'twrnc';
-import useUserProfile, { UserProfileProvider } from '../hooks/userProfileProvider';
+import useUserProfile from '../hooks/userProfileProvider';
 
 const ProfileScreen = () => {
-    const { user } = useUserProfile();
+    const { usernameState } = useUserProfile();
     const navigation = useNavigation();
+
+    console.log(usernameState);
 
     return (
         <SafeAreaView>
@@ -16,7 +18,7 @@ const ProfileScreen = () => {
                 style={tw`h-30 w-30 rounded-full`}
                 source={{ uri: "https://tinder.com/static/tinder.png" }} // change to user image when complete
             />
-            <Text>{user ? `Profile of ${user}` : 'Loading user information...'}</Text>
+            <Text>{usernameState ? `Profile of ${usernameState}` : 'Loading user information...'}</Text>
             <Button title="Update Username" onPress={() => navigation.navigate("NewUsername")} />
             <Button title="Update Name" onPress={() => navigation.navigate("NewName")} />
             <Button title="Home" onPress={() => navigation.navigate('Home')} />

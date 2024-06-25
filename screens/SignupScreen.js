@@ -8,12 +8,13 @@ const SignupScreen = () => {
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
     const { signup } = useAuth();
     const navigation = useNavigation();
 
     const handleSignup = async () => {
         try {
-            await signup(username, password, name);
+            await signup(username, password, name, email);
             navigation.navigate('Login'); // go to login screen
         } catch (error) {
             Alert.alert('Signup Error', error.message); // Display error message if signup fails
@@ -33,6 +34,12 @@ const SignupScreen = () => {
                 placeholder="Name"
                 value={name}
                 onChangeText={setName}
+                style={{ marginBottom: 16, borderWidth: 1, padding: 8, width: '80%' }}
+            />
+            <TextInput
+                placeholder="Email"
+                value={email}
+                onChangeText={setEmail}
                 style={{ marginBottom: 16, borderWidth: 1, padding: 8, width: '80%' }}
             />
             <TextInput

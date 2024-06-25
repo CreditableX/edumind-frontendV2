@@ -17,13 +17,13 @@ import NewUsernameScreen from './screens/NewUsernameScreen';
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
-  const { user } = useAuth();
-  const [currentUser, setCurrentUser] = useState(user);
+  const { username } = useAuth();
+  const [currentUser, setCurrentUser] = useState(username);
 
   useEffect(() => {
-    setCurrentUser(user);
-    console.log(user);
-  }, [user]);
+    setCurrentUser(username);
+    console.log(username);
+  }, [username]);
 
   return (
     <Stack.Navigator
