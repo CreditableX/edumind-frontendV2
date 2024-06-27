@@ -9,7 +9,7 @@ import tw from 'twrnc';
 import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons'
 import images from '../assets/images';
 
-const HomeScreen = () => {
+const TutorHomeScreen = () => {
   const navigation = useNavigation();
   const { user, logout } = useAuth();
 
@@ -36,7 +36,6 @@ const HomeScreen = () => {
           <Image
             style={tw`h-14 w-25`} source={require("../assets/edumind.png")}
           />
-
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
@@ -53,15 +52,16 @@ const HomeScreen = () => {
             style={tw`my-4 rounded-lg w-36 h-12 justify-center`}
             labelStyle={tw`text-white text-lg`}
           >
-            Ask Now
+            Browse
           </Button>
-          <Text style={tw`mt-1 text-base`}>Get an answer right away!</Text>
+          <Text style={tw`mt-1 text-base`}>Browse available questions</Text>
         </Card.Content>
       </Card>
 
-      <Button title="Testing" icon="upload" mode="contained" onPress={() => navigation.navigate("TutorHome")}>
-        Test Tutor Screen
+      <Button title="Testing" icon="upload" mode="contained" onPress={() => navigation.navigate("Home")}>
+        Main home
       </Button>
+
       <Button title="Log Out" icon="upload" mode="contained" onPress={() => handleLogOut()}>
         Logout
       </Button>
@@ -69,6 +69,4 @@ const HomeScreen = () => {
   )
 }
 
-export default HomeScreen
-
-const styles = StyleSheet.create({})
+export default TutorHomeScreen

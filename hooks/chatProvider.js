@@ -114,7 +114,7 @@ export const ChatsProvider = ({ children }) => {
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
-      console.error('Get messages error:', err);
+      console.error('Create message error:', err);
     } finally {
       setLoading(false);
     }

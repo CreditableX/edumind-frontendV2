@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert, ImageBackground } from 'react-native';
+import { Checkbox } from 'react-native-paper';
 import useAuth from '../hooks/useAuth';
 import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/core';
@@ -7,12 +8,18 @@ import { useNavigation } from '@react-navigation/core';
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useAuth();
+  const [isTutor, setIsTutor] = useState(false);
+  const { studentLogin } = useAuth();
   const navigation = useNavigation();
 
   const handleLogin = async () => {
     try {
-      await login(username, password); // Using the login function from useAuth
+      if (isTutor) {
+        // tutor login logic
+      } else {
+        await studentLogin(username, password); // Student login
+      }
+
       navigation.navigate('Home'); // Navigate to home page if successful
     } catch (error) {
       console.error('Login error:', error); // Handle login error
@@ -38,6 +45,15 @@ const LoginScreen = () => {
           secureTextEntry
           style={tw`mb-4 border p-2 w-full`}
         />
+
+        <View style={tw`flex-row items-center mb-4`}>
+          <Checkbox
+            status={isTutor ? 'checked' : 'unchecked'}
+            onPress={() => setIsTutor(!isTutor)}
+          />
+          <Text style={tw`ml-2 text-base`}>I am a tutor</Text>
+        </View>
+
         <View style={tw`flex-row justify-between w-full`}>
           <View style={tw`flex-1 mr-2`}>
             <Button title="Login" onPress={handleLogin} />

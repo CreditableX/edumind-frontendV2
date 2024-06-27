@@ -40,7 +40,6 @@ const ChatScreen = () => {
   return (
     <SafeAreaView style={tw`flex-1`}>
       <View style={tw`flex-1`}>
-        <Text>ChatScreen</Text>
         {chats && chats.length > 0 ? (
           <FlatList
             data={chats}

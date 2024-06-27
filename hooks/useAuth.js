@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // login function
-  const login = async (username, password) => {
+  const studentLogin = async (username, password) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
@@ -105,7 +105,7 @@ return (
       token,
       email,
       signup,
-      login,
+      studentLogin,
       logout,
     }}
   >
