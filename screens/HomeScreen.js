@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View, Button, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
+import { Button, Card, Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/core';
@@ -33,7 +34,7 @@ const HomeScreen = () => {
 
         <TouchableOpacity>
           <Image
-            style={tw`h-14 w-14`} source={require("../assets/edumind.png")} // see if you can fix, i cant get it to show up
+            style={tw`h-14 w-25`} source={require("../assets/edumind.png")}
           />
 
         </TouchableOpacity>
@@ -44,14 +45,23 @@ const HomeScreen = () => {
       </View>
       {/* End Header */}
 
+      <Card style={tw`m-4 p-4 rounded-xl`}>
+        <Card.Content style={tw`items-center`}>
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate("NewChat")}
+            style={tw`my-4 rounded-lg w-36 h-12 justify-center`}
+            labelStyle={tw`text-white text-lg`}
+          >
+            Ask Now
+          </Button>
+          <Text style={tw`mt-1 text-base`}>Get an answer right away!</Text>
+        </Card.Content>
+      </Card>
 
-      <Text>HomeScreen</Text>
-      <Button title="New Chat"
-        onPress={() => navigation.navigate("NewChat")}
-      />
-      <Button title="Log Out"
-        onPress={() => handleLogOut()}
-      />
+      <Button title="Log Out" icon="upload" mode="contained" onPress={() => handleLogOut()}>
+        Logout
+      </Button>
     </SafeAreaView>
   )
 }

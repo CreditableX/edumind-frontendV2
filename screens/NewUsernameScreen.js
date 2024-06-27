@@ -25,7 +25,7 @@ const NewUsernameScreen = () => {
             <Text>Enter new username</Text>
             <TextInput
                 placeholder="Username"
-                value={username}
+                value={"name"}
                 onChangeText={setUsername}
                 style={{ marginBottom: 16, borderWidth: 1, padding: 8, width: '80%' }}
             />

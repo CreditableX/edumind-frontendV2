@@ -52,11 +52,16 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 200) {
         console.log("login successful");
         // Assuming the API returns user data upon successful login
-        console.log(response.data.token);
+        // console.log(response.data.token);
+        
         setName(response.data.user.name);
         setUsername(response.data.user.username);
         setToken(response.data.token);
         setEmail(response.data.user.email);
+        console.log(response.data);
+        console.log("login name is " + name);
+        console.log("login username is"  + username);
+        console.log("login email is " + email);
       } else {
         throw new Error('Login failed');
       }
@@ -98,6 +103,7 @@ return (
       loading,
       error,
       token,
+      email,
       signup,
       login,
       logout,

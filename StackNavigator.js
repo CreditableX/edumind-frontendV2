@@ -13,6 +13,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import SingleChatScreen from './screens/SingleChatScreen';
 import NewNameScreen from './screens/NewNameScreen';
 import NewUsernameScreen from './screens/NewUsernameScreen';
+import ChangeDetailsScreen from './screens/ChangeDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,7 @@ const StackNavigator = () => {
           <Stack.Screen name="SingleChat" component={SingleChatScreen} />
           <Stack.Screen name="NewName" component={NewNameScreen} />
           <Stack.Screen name="NewUsername" component={NewUsernameScreen} />
+          <Stack.Screen name="ChangeDetails" component={ChangeDetailsScreen} />
         </>
       ) : (
         <>

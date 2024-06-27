@@ -13,7 +13,6 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     try {
       await login(username, password); // Using the login function from useAuth
-      Alert.alert('Successful');
       navigation.navigate('Home'); // Navigate to home page if successful
     } catch (error) {
       console.error('Login error:', error); // Handle login error
@@ -21,7 +20,7 @@ const LoginScreen = () => {
   };
 
   return (
-    <View style={tw`flex-1 justify-center items-center`}>
+    <View style={tw`flex-1 justify-center items-center bg-black`}>
       <View style={tw`bg-white p-4 rounded-lg shadow-lg w-4/5 max-w-md`}>
         <Text style={tw`text-center mb-4 text-lg font-bold`}>
           You are not logged in! Login to see this page.

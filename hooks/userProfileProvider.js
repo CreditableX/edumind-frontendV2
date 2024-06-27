@@ -11,13 +11,17 @@ export const UserProfileProvider = ({ children }) => {
 
   const [usernameState, setUsernameState] = useState(username);
   const [nameState, setNameState] = useState(name);
+  const [emailState, setEmailState] = useState(email);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  console.log("username is a " + username)
 
   useEffect(() => {
     setUsernameState(username);
     setNameState(name);
-  }, [username, name]);
+    setEmailState(email);
+  }, []);
 
     // Setting up Axios interceptor to include token in all requests
     useEffect(() => {
@@ -40,19 +44,21 @@ export const UserProfileProvider = ({ children }) => {
       };
     }, [token]); // Re-run the effect if the token changes
 
-  const updateUsername = async (newUsername) => {
+  const updateDetails = async (newUsername, newName, newEmail) => {
     setLoading(true);
     setError(null);
     try {
       const response = await axios.put('https://edumind-3587039ec3f2.herokuapp.com/v1/students/profile', {
         username: newUsername,
-        name,
-        email
+        name: newName,
+        email: newEmail
       });
       if (response.status === 200) {
         setUsernameState(newUsername);
+        setNameState(newName);
+        setEmailState(newEmail);
       } else {
-        throw new Error('Username update failed');
+        throw new Error('Update failed');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -62,30 +68,8 @@ export const UserProfileProvider = ({ children }) => {
     }
   };
 
-  const updateName = async (newName) => {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axios.put('https://edumind-3587039ec3f2.herokuapp.com/v1/students/profile', {
-        username,
-        name: newName,
-        email
-      });
-      if (response.status === 200) {
-        setNameState(newName);
-      } else {
-        throw new Error('Name update failed');
-      }
-    } catch (err) {
-      setError(err.response?.data?.message || err.message);
-      console.error('Update name error:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <UserProfileContext.Provider value={{ usernameState, nameState, updateUsername, updateName, loading, error }}>
+    <UserProfileContext.Provider value={{ usernameState, nameState, emailState, updateDetails}}>
       {children}
     </UserProfileContext.Provider>
   );
