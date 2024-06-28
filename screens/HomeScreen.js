@@ -1,5 +1,5 @@
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
-import { Button, Card, Text } from 'react-native-paper';
+import { Button, Card, Text, Title } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/core';
@@ -8,10 +8,12 @@ import { useState } from 'react';
 import tw from 'twrnc';
 import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons'
 import images from '../assets/images';
+import useChats from '../hooks/chatProvider';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const { user, logout } = useAuth();
+  const { getChats, chats, updateSingleChatId } = useChats();
 
   const handleLogOut = async () => {
     try {
@@ -21,8 +23,31 @@ const HomeScreen = () => {
     }
   }
 
+  const moveToSingleChat = (id) => {
+    updateSingleChatId(id);
+    navigation.navigate("SingleChat");
+  }
+
+  const selectedChats = chats ? chats.slice(0, 2) : [];
+
+  const ChatItem = ({ chat }) => {
+    return (
+      <TouchableOpacity onPress={() => moveToSingleChat(chat.chat_id)} style={tw`p-4 border-b border-gray-400`}>
+        <Card style={tw`m-2 p-2 rounded-lg shadow-md`}>
+          <View style={tw`flex-row items-center`}>
+            <Image source={require('../assets/edumind.png')} style={tw`w-16 h-16 rounded-full m-2`} />
+            <View style={tw`flex-1 ml-2`}>
+              <Title style={tw`text-lg font-bold`}>{chat.header}</Title>
+              <Text style={tw`text-gray-500 text-sm`}>{chat.subject}</Text>
+            </View>
+          </View>
+        </Card>
+      </TouchableOpacity>
+    );
+  }
+
   return (
-    <SafeAreaView>
+    <SafeAreaView style={tw`flex-1`}>
       {/* Header */}
       <View style={tw`flex-row items-center justify-between px-5`}>
         <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
@@ -56,6 +81,20 @@ const HomeScreen = () => {
             Ask Now
           </Button>
           <Text style={tw`mt-1 text-base`}>Get an answer right away!</Text>
+        </Card.Content>
+      </Card>
+
+      <Text style={tw`text-xl font-bold text-center`}>Recent chats</Text>
+
+      <Card style={tw`m-4 p-4 rounded-xl`}>
+        <Card.Content>
+          {selectedChats.length > 0 ? (
+            selectedChats.map(chat => (
+              <ChatItem key={chat.chat_id} chat={chat} />
+            ))
+          ) : (
+            <Text style={tw`mt-4 text-lg text-gray-600`}>No chats available</Text>
+          )}
         </Card.Content>
       </Card>
 
