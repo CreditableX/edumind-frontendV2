@@ -2,7 +2,7 @@
 import React, { createContext, useState, useContext } from 'react';
 import axios from 'axios';
 import useAuth from './useAuth';
-import { useEffect } from 'react';
+import { useEffect, useS } from 'react';
 
 const ChatsContext = createContext();
 
@@ -56,7 +56,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      console.log(subject_id + " " + header + " " + photo_url)
+      // console.log(subject_id + " " + header + " " + photo_url)
       const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/students/new-question', {
         subject_id,
         header,
@@ -83,9 +83,11 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`https://edumind-3587039ec3f2.herokuapp.com/v1/chat/${singleChatId}`);
+      const response = await axios.get(`https://edumind-3587039ec3f2.herokuapp.com/v1/chat/${singleChatId}/view`);
       if (response.status === 200) {
         // Handle messages data
+        console.log("ok got messages");
+        return response;
       } else {
         throw new Error('Failed to fetch messages');
       }
@@ -111,7 +113,7 @@ export const ChatsProvider = ({ children }) => {
       const response = await axios.post(`https://edumind-3587039ec3f2.herokuapp.com/v1/chat/${singleChatId}/new`, {
         content
       });
-      if (response.status === 200) {
+      if (response.status === 201) {
         console.log("message put success");
       } else {
         throw new Error('Failed to fetch messages');
