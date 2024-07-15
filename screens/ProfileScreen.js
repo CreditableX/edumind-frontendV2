@@ -7,10 +7,8 @@ import { useNavigation } from '@react-navigation/core';
 import tw from 'twrnc';
 
 const ProfileScreen = () => {
-    const { username } = useAuth();
+    const { username, name, email } = useAuth();
     const navigation = useNavigation();
-
-    console.log(username);
 
     return (
         <SafeAreaView style={tw`flex-1 p-4`}>
@@ -21,8 +19,8 @@ const ProfileScreen = () => {
                 />
                 <Text style={tw`text-3xl font-bold`}>{username ? `${username}` : 'Loading user information...'}</Text>
             </View>
-            <Text style={tw`text-xl font-bold`}>Name goes here when implemented</Text>
-            <Text style={tw`text-xl font-bold`}>Email goes here when implemented</Text>
+            <Text style={tw`text-xl font-bold`}>{name ? `Name: ${name}` : 'Could not load name'}</Text>
+            <Text style={tw`text-xl font-bold`}>{email ? `Email: ${email}` : 'Could not load email'}</Text>
             <Button
                 onPress={() => navigation.navigate("ChangeDetails")}
                 mode="contained"

@@ -21,21 +21,15 @@ const ChangeDetailsScreen = () => {
     console.log("name is" + name);
 
     useEffect(() => {
-        console.log("Name from useAuth:", name);
-        console.log("Username from useAuth:", username);
-        console.log("Email from useAuth:", email);
+        // console.log("Name from useAuth:", name);
+        // console.log("Username from useAuth:", username);
+        // console.log("Email from useAuth:", email);
 
         // Set the initial state when the component mounts
         setNewName(name);
         setNewUsername(username);
         setNewEmail(email);
     }, [name, username, email]); // Only run this effect on initial mount or if these values change
-    // useEffect(() => {
-    //     // Set the initial values to nameState, usernameState, emailState when the component mounts
-    //     setNewName(nameState);
-    //     setNewUsername(usernameState);
-    //     setNewEmail(emailState);
-    // }, [nameState, usernameState, emailState]); // Ensure useEffect runs when any of these state values change
 
     const handleUpdateDetails = async (nameState, usernameState, emailState) => {
         try {

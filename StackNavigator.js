@@ -15,6 +15,7 @@ import NewNameScreen from './screens/NewNameScreen';
 import NewUsernameScreen from './screens/NewUsernameScreen';
 import ChangeDetailsScreen from './screens/ChangeDetailsScreen';
 import TutorHomeScreen from './screens/TutorHomeScreen';
+import PhotoTestScreen from './screens/PhotoTest';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,7 @@ const StackNavigator = () => {
           <Stack.Screen name="NewUsername" component={NewUsernameScreen} />
           <Stack.Screen name="ChangeDetails" component={ChangeDetailsScreen} />
           <Stack.Screen name="TutorHome" component={TutorHomeScreen} />
+          <Stack.Screen name="PhotoTest" component={PhotoTestScreen} />
         </>
       ) : (
         <>

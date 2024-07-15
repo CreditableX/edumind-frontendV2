@@ -4,55 +4,47 @@ import { Button, TextInput } from "react-native-paper";
 import tw from 'twrnc';
 import useChats from '../hooks/chatProvider';
 import DropDown from 'react-native-paper-dropdown';
+import { HeaderBackButton } from '@react-navigation/native-stack'
 import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from "expo-image-picker";
 import { compressImage } from '../util/ImageProcessing';
 import { uploadToCloudinary } from '../config/cloudinaryConfig';
 
-const NewChatScreen = () => {
+const PhotoTestScreen = () => {
     const [header, setHeader] = useState('');
     const [image, setImage] = useState('');
     const [message, setMessage] = useState('');
     const [topic, setTopic] = useState('');
     const [topicVisible, setTopicVisible] = useState(false);
+    const [aspectRatio, setAspectRatio] = useState('')
     const { newChat } = useChats();
     const navigation = useNavigation();
 
     const topics = ["chemistry", "physics", "math"];
 
-    const openTopicMenu = () => setTopicVisible(true);
-    const closeTopicMenu = () => setTopicVisible(false);
 
     const handleNewChat = async () => {
         // if an image is attached, then we call uploadToCloudinary function
         if (image != null) {
             try {
-                // console.log("image " + image)
+                console.log("image " + image)
                 const compressedImage = await compressImage(image);
                 try {
                     const response = await uploadToCloudinary(compressedImage, "default");
+                    console.log("Image Upload successful");
                     imageLink = response.secure_url;
-                    try {
-                        console.log('topic is ' + topic)
-                        console.log('header is ' + header)
-                        await newChat(1, header, imageLink, message);
-                        navigation.navigate('Chat'); // go to chats screen
-                    } catch (error) {
-                        Alert.alert('Chat creation error', error.message); // Display error message if chat creation fails
-                    }
-
                 } catch (uploadError) {
                     console.error("Upload failed:", uploadError);
                     Alert.alert("Image uploading failed");
                     return;
                 }
-            } catch (error) {
+                } catch (error) {
                 console.error("Image compression failed:", error);
                 Alert.alert("Image compression failed");
                 return;
+                }
             }
-        }
-    };
+        };
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -87,50 +79,14 @@ const NewChatScreen = () => {
                 <Button icon="camera" onPress={pickImage}>
                     Upload a photo of your question!
                 </Button>
-                {image && (
+                {image && aspectRatio && (
                     <View style={tw`items-center mt-2`}>
                         <Image
                             source={{ uri: image }}
-                            style={{ width: '100%', aspectRatio: 1 }}
+                            style={{ width: '100%', aspectRatio: aspectRatio }}
                         />
                     </View>
                 )}
-            </View>
-
-            <View style={tw`w-full mt-4`}>
-                {/* Dropdown for Subject */}
-                <DropDown
-                    label="Topic"
-                    mode="outlined"
-                    visible={topicVisible}
-                    showDropDown={openTopicMenu}
-                    onDismiss={closeTopicMenu}
-                    value={topic ? topic : "Select Topic"}
-                    setValue={setTopic}
-                    list={topics.map((topicOption) => ({
-                        label: topicOption,
-                        value: topicOption,
-                    }))}
-                />
-
-                <TextInput
-                    label="Header"
-                    value={header}
-                    onChangeText={setHeader}
-                    style={tw`mt-4`}
-                    multiline={true}
-                    numberOfLines={1}
-                    maxLength={100}
-                />
-                <TextInput
-                    label="Message"
-                    value={message}
-                    onChangeText={setMessage}
-                    style={tw`mt-4`}
-                    multiline={true}
-                    numberOfLines={6}
-                    textAlignVertical={"top"}
-                />
             </View>
 
             <View style={tw`mt-4 w-full`}>
@@ -142,4 +98,4 @@ const NewChatScreen = () => {
     );
 };
 
-export default NewChatScreen;
+export default PhotoTestScreen;

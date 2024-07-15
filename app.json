@@ -15,7 +15,8 @@
     ],
     "userInterfaceStyle": "light",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.creditablecreates.edumindtinderguide"
     },
     "android": {
       "adaptiveIcon": {

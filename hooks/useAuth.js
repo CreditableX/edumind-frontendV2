@@ -45,23 +45,25 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
-      const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/login', {
+      const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/students/login', {
         username,
         password
       });
+      console.log(response.data.student)
       if (response.status === 200) {
         console.log("login successful");
         // Assuming the API returns user data upon successful login
         // console.log(response.data.token);
         
-        setName(response.data.user.name);
-        setUsername(response.data.user.username);
+        setName(response.data.student.name);
+        setUsername(response.data.student.username);
         setToken(response.data.token);
-        setEmail(response.data.user.email);
+        setEmail(response.data.student.email);
         console.log(response.data);
         console.log("login name is " + name);
-        console.log("login username is"  + username);
+        console.log("login username is "  + username);
         console.log("login email is " + email);
+        console.log("token is " + token);
       } else {
         throw new Error('Login failed');
       }

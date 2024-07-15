@@ -15,8 +15,6 @@ export const UserProfileProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  console.log("username is a " + username)
-
   useEffect(() => {
     setUsernameState(username);
     setNameState(name);
