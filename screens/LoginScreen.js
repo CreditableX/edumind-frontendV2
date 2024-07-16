@@ -44,6 +44,7 @@ const LoginScreen = () => {
           onChangeText={setPassword}
           secureTextEntry
           style={tw`mb-4 border p-2 w-full`}
+          onSubmitEditing={handleLogin} // Handle pressing the "Enter" key
         />
 
         <View style={tw`flex-row items-center mb-4`}>
