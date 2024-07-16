@@ -101,6 +101,7 @@ export const ChatsProvider = ({ children }) => {
   };
 
   const updateSingleChatId = async (id) => {
+    setMessages(null);
     setSingleChatId(id);
     console.log("updating single chat id: " + id);
   }

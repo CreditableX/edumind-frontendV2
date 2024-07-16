@@ -17,6 +17,7 @@ const SingleChatScreen = () => {
   const handleNewMessage = async () => {
     try {
       await newMessage(newMessageContent);
+      setNewMessageContent('');
       await getMessages();
     } catch (error) {
       Alert.alert('message send error', error.message); // Display error message if msg creation fails
@@ -51,8 +52,17 @@ const SingleChatScreen = () => {
 
   return (
     <SafeAreaView style={tw`flex-1`}>
-      <Text style={{ fontSize: 24, marginBottom: 20 }}>SingleChatScreen</Text>
-      <Text>Chat ID: {singleChatId}</Text>
+        <View style={tw`flex-row items-center justify-between p-4`}>
+          <Button
+              icon="arrow-left"
+              onPress={() => navigation.navigate('Home')}
+              style={tw`rounded-l`} // Increase padding and use rounded corners
+              contentStyle={tw`py-2 px-6`} // Adjust padding inside the button
+          />
+          <Text>Tutor name goes here </Text>
+          <Text>Tutor picture</Text>
+      </View>
+
       <View style={tw`flex-1`}>
         <FlatList
           data={messages}
@@ -62,12 +72,15 @@ const SingleChatScreen = () => {
           inverted
         />
       </View>
+
       <View style={tw`flex-row items-center p-4`}>
         <TextInput
           style={[tw`flex-1 p-2 border border-gray-400 rounded-md`, { marginRight: 10 }]}
           placeholder="Type your message..."
           value={newMessageContent}
           onChangeText={setNewMessageContent}
+          onSubmitEditing={handleNewMessage} // Handle pressing the "Enter" key
+          blurOnSubmit={false} // Keep the input focused after pressing "Enter"
         />
         <Button mode="contained" onPress={handleNewMessage}>
           Send
