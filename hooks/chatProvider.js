@@ -10,6 +10,7 @@ export const ChatsProvider = ({ children }) => {
   const { username, token } = useAuth();
   const [chats, setChats] = useState(null);
   const [singleChatId, setSingleChatId] = useState(null);
+  const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -87,7 +88,7 @@ export const ChatsProvider = ({ children }) => {
       if (response.status === 200) {
         // Handle messages data
         console.log("ok got messages");
-        return response;
+        setMessages(response.data)
       } else {
         throw new Error('Failed to fetch messages');
       }
@@ -127,7 +128,7 @@ export const ChatsProvider = ({ children }) => {
   }
 
   return (
-    <ChatsContext.Provider value={{ chats, singleChatId, setSingleChatId, getChats, newChat, getMessages, updateSingleChatId, newMessage, loading, error }}>
+    <ChatsContext.Provider value={{ chats, singleChatId, messages, setSingleChatId, getChats, newChat, getMessages, updateSingleChatId, newMessage, loading, error }}>
       {children}
     </ChatsContext.Provider>
   );

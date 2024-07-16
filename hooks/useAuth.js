@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [name, setName] = useState(null);
   const [username, setUsername] = useState(null);
   const [email, setEmail] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [token, setToken] = useState(null); // Authentication token
@@ -59,6 +60,7 @@ export const AuthProvider = ({ children }) => {
         setUsername(response.data.student.username);
         setToken(response.data.token);
         setEmail(response.data.student.email);
+        setUserId(response.data.student.student_id);
         console.log(response.data);
         console.log("login name is " + name);
         console.log("login username is "  + username);
@@ -106,6 +108,7 @@ return (
       error,
       token,
       email,
+      userId,
       signup,
       studentLogin,
       logout,
