@@ -39,7 +39,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/chat/');
+      const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/chats');
       if (response.status === 200) {
         setChats(response.data);
       } else {
@@ -84,7 +84,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`https://edumind-3587039ec3f2.herokuapp.com/v1/chat/${singleChatId}/view`);
+      const response = await axios.get(`https://edumind-3587039ec3f2.herokuapp.com/v1/chats/${singleChatId}`);
       if (response.status === 200) {
         // Handle messages data
         console.log("ok got messages");
@@ -112,7 +112,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`https://edumind-3587039ec3f2.herokuapp.com/v1/chat/${singleChatId}/new`, {
+      const response = await axios.post(`https://edumind-3587039ec3f2.herokuapp.com/v1/chats/${singleChatId}`, {
         content
       });
       if (response.status === 201) {

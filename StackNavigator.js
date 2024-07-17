@@ -1,13 +1,12 @@
-import { View, Text } from 'react-native'
-import React, { useEffect } from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import HomeScreen from './screens/HomeScreen';
+import { View, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import StudentHomeScreen from './screens/StudentHomeScreen';
 import ChatScreen from './screens/ChatScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import NewChatScreen from './screens/NewChatScreen';
 import useAuth from './hooks/useAuth';
-import { useState } from 'react';
 import StartUpScreen from './screens/StartUpScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import SingleChatScreen from './screens/SingleChatScreen';
@@ -20,7 +19,7 @@ import PhotoTestScreen from './screens/PhotoTest';
 const Stack = createNativeStackNavigator();
 
 const StackNavigator = () => {
-  const { username } = useAuth();
+  const { username, userType } = useAuth();
   const [currentUser, setCurrentUser] = useState(username);
 
   useEffect(() => {
@@ -35,18 +34,29 @@ const StackNavigator = () => {
       }}
     >
       {currentUser ? (
-        <>
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Chat" component={ChatScreen} />
-          <Stack.Screen name="NewChat" component={NewChatScreen} />
-          <Stack.Screen name="Profile" component={ProfileScreen} />
-          <Stack.Screen name="SingleChat" component={SingleChatScreen} />
-          <Stack.Screen name="NewName" component={NewNameScreen} />
-          <Stack.Screen name="NewUsername" component={NewUsernameScreen} />
-          <Stack.Screen name="ChangeDetails" component={ChangeDetailsScreen} />
-          <Stack.Screen name="TutorHome" component={TutorHomeScreen} />
-          <Stack.Screen name="PhotoTest" component={PhotoTestScreen} />
-        </>
+        userType == 'student' ? (
+          <>
+            <Stack.Screen name="StudentHome" component={StudentHomeScreen} />
+            <Stack.Screen name="Chat" component={ChatScreen} />
+            <Stack.Screen name="NewChat" component={NewChatScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="SingleChat" component={SingleChatScreen} />
+            <Stack.Screen name="NewName" component={NewNameScreen} />
+            <Stack.Screen name="NewUsername" component={NewUsernameScreen} />
+            <Stack.Screen name="ChangeDetails" component={ChangeDetailsScreen} />
+          </>
+        ) : userType == 'tutor' ? (
+          <>
+            <Stack.Screen name="TutorHome" component={TutorHomeScreen} />
+            <Stack.Screen name="Chat" component={ChatScreen} />
+            <Stack.Screen name="NewChat" component={NewChatScreen} />
+            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="SingleChat" component={SingleChatScreen} />
+            <Stack.Screen name="NewName" component={NewNameScreen} />
+            <Stack.Screen name="NewUsername" component={NewUsernameScreen} />
+            <Stack.Screen name="ChangeDetails" component={ChangeDetailsScreen} />
+          </>
+        ) : null
       ) : (
         <>
           <Stack.Screen name="StartUp" component={StartUpScreen} />
@@ -55,7 +65,7 @@ const StackNavigator = () => {
         </>
       )}
     </Stack.Navigator>
-  )
-}
+  );
+};
 
 export default StackNavigator;

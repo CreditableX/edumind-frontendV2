@@ -10,7 +10,7 @@ import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons'
 import images from '../assets/images';
 import useChats from '../hooks/chatProvider';
 
-const HomeScreen = () => {
+const StudentHomeScreen = () => {
   const navigation = useNavigation();
   const { user, logout } = useAuth();
   const { getChats, chats, updateSingleChatId } = useChats();
@@ -121,6 +121,6 @@ const HomeScreen = () => {
   )
 }
 
-export default HomeScreen
+export default StudentHomeScreen
 
 const styles = StyleSheet.create({})

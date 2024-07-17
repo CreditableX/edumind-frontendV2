@@ -9,20 +9,24 @@ const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isTutor, setIsTutor] = useState(false);
-  const { studentLogin } = useAuth();
+  const { studentLogin, tutorLogin } = useAuth();
   const navigation = useNavigation();
 
   const handleLogin = async () => {
     try {
       if (isTutor) {
-        // tutor login logic
+        await tutorLogin(username, password);
       } else {
         await studentLogin(username, password); // Student login
       }
-
-      navigation.navigate('Home'); // Navigate to home page if successful
     } catch (error) {
       console.error('Login error:', error); // Handle login error
+    }
+
+    if (isTutor) {
+      navigation.navigate('TutorHome'); // Navigate to home page if successful
+    } else {
+      navigation.navigate('StudentHome'); // Navigate to home page if successful
     }
   };
 
