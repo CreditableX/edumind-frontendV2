@@ -11,9 +11,10 @@ import useAuth from './hooks/useAuth';
 import StartUpScreen from './screens/StartUpScreen';
 import StudentProfileScreen from './screens/student/StudentProfileScreen';
 import SingleChatScreen from './screens/SingleChatScreen';
-import ChangeDetailsScreen from './screens/ChangeDetailsScreen';
+import StudentChangeDetailsScreen from './screens/student/StudentChangeDetailsScreen';
 import TutorHomeScreen from './screens/tutor/TutorHomeScreen';
 import TutorProfileScreen from './screens/tutor/TutorProfileScreen';
+import TutorChangeDetailsScreen from './screens/tutor/TutorChangeDetailsScreen';
 import BrowseQuestionsScreen from './screens/tutor/BrowseQuestionsScreen';
 import TutorChatScreen from './screens/tutor/TutorChatScreen';
 import AcceptQuestionScreen from './screens/tutor/AcceptQuestionScreen';
@@ -43,7 +44,7 @@ const StackNavigator = () => {
             <Stack.Screen name="NewChat" component={NewChatScreen} />
             <Stack.Screen name="StudentProfile" component={StudentProfileScreen} />
             <Stack.Screen name="SingleChat" component={SingleChatScreen} />
-            <Stack.Screen name="ChangeDetails" component={ChangeDetailsScreen} />
+            <Stack.Screen name="StudentChangeDetails" component={StudentChangeDetailsScreen} />
           </>
         ) : userType == 'tutor' ? (
           <>
@@ -52,7 +53,7 @@ const StackNavigator = () => {
             <Stack.Screen name="BrowseQuestions" component={BrowseQuestionsScreen} />
             <Stack.Screen name="TutorProfile" component={TutorProfileScreen} />
             <Stack.Screen name="SingleChat" component={SingleChatScreen} />
-            <Stack.Screen name="ChangeDetails" component={ChangeDetailsScreen} />
+            <Stack.Screen name="TutorChangeDetails" component={TutorChangeDetailsScreen} />
             <Stack.Screen name="AcceptQuestion" component={AcceptQuestionScreen} />
           </>
         ) : (

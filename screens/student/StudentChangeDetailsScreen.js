@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Alert } from 'react-native';
 import { Button } from 'react-native-paper'
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';
-import useUserProfile, { UserProfileProvider } from '../hooks/userProfileProvider';
+import useUserProfile, { UserProfileProvider } from '../../hooks/userProfileProvider';
 import { useEffect } from 'react';
 
-const ChangeDetailsScreen = () => {
+const StudentChangeDetailsScreen = () => {
     const { name, username, email } = useAuth();
     const { updateDetails } = useUserProfile();
     const navigation = useNavigation();
@@ -73,4 +73,4 @@ const ChangeDetailsScreen = () => {
     );
 }
 
-export default ChangeDetailsScreen
+export default StudentChangeDetailsScreen

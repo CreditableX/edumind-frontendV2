@@ -36,7 +36,7 @@ const TutorProfileScreen = () => {
             <Text style={tw`text-xl font-bold`}>{email ? `Email: ${email}` : 'Could not load email'}</Text>
             <Text style={tw`text-xl font-bold`}>{subjectString()}</Text>
             <Button
-                onPress={() => navigation.navigate("ChangeDetails")}
+                onPress={() => navigation.navigate("TutorChangeDetails")}
                 mode="contained"
                 style={tw`mb-2`}
             >
