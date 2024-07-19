@@ -64,7 +64,10 @@ const LoginScreen = () => {
             <Button title="Login" onPress={handleLogin} />
           </View>
           <View style={tw`flex-1 ml-2`}>
-            <Button title="Signup" onPress={() => navigation.navigate("Signup")} />
+            <Button title="Signup (Student)" onPress={() => navigation.navigate("SignupStudent")} />
+          </View>
+          <View style={tw`flex-1 ml-2`}>
+            <Button title="Signup (Tutor)" onPress={() => navigation.navigate("SignupTutor")} />
           </View>
         </View>
       </View>

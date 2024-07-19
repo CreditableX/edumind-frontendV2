@@ -153,7 +153,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`https://edumind-3587039ec3f2.herokuapp.com/v1/chats/${singleChatId}/accept`, {
+      const response = await axios.post(`https://edumind-3587039ec3f2.herokuapp.com/v1/chats/${singleChatId}/accept`, {
       });
       if (response.status === 200) {
         console.log("question accepted");

@@ -126,13 +126,14 @@ export const AuthProvider = ({ children }) => {
         console.log("login successful");
 
         // Assuming the API returns user data upon successful login
-        // console.log(response.data.token);
-
+        // console.log(response.data.token);  
+        await setToken(response.data.token);
+        await setSubjects(response.data.tutor.subjects);
         setName(response.data.tutor.name);
         setUsername(response.data.tutor.username);
-        setToken(response.data.token);
         setEmail(response.data.tutor.email);
         setUserId(response.data.tutor.tutor_id);
+        
 
         console.log("usertpye is " + userType);
         console.log(response.data);

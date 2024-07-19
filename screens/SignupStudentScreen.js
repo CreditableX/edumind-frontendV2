@@ -4,17 +4,17 @@ import useAuth from '../hooks/useAuth';
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';
 
-const SignupScreen = () => {
+const SignupStudentScreen = () => {
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const { signup } = useAuth();
+    const { signupStudent } = useAuth();
     const navigation = useNavigation();
 
     const handleSignup = async () => {
         try {
-            await signup(username, password, name, email);
+            await signupStudent(username, password, name, email);
             navigation.navigate('Login'); // go to login screen
         } catch (error) {
             Alert.alert('Signup Error', error.message); // Display error message if signup fails
@@ -58,4 +58,4 @@ const SignupScreen = () => {
     );
 }
 
-export default SignupScreen
+export default SignupStudentScreen

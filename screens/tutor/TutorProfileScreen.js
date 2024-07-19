@@ -7,9 +7,22 @@ import { useNavigation } from '@react-navigation/core';
 import tw from 'twrnc';
 
 const TutorProfileScreen = () => {
-    const { username, name, email } = useAuth();
+    const { username, name, email, subjects } = useAuth();
     const navigation = useNavigation();
 
+    const subjectString = () => {
+        if (subjects) {
+            repStr = ''
+            for (i = 0; i < subjects.length; i++) {
+                console.log(subjects[i].subject_id);
+                repStr += `${subjects[i].subject_id}` + ' | ' + `Years: ${subjects[i].yoe}` + "\n";           
+            }
+            return repStr;
+        } else {
+            return 'Could not load subjects';
+        }
+    
+    }
     return (
         <SafeAreaView style={tw`flex-1 p-4`}>
             <View style={tw`flex-row items-center mb-4`}>
@@ -21,6 +34,7 @@ const TutorProfileScreen = () => {
             </View>
             <Text style={tw`text-xl font-bold`}>{name ? `Name: ${name}` : 'Could not load name'}</Text>
             <Text style={tw`text-xl font-bold`}>{email ? `Email: ${email}` : 'Could not load email'}</Text>
+            <Text style={tw`text-xl font-bold`}>{subjectString()}</Text>
             <Button
                 onPress={() => navigation.navigate("ChangeDetails")}
                 mode="contained"
