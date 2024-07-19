@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, ImageBackground, TouchableOpacity } from 'react-native';
-import useAuth from '../hooks/useAuth';
+import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';
 
@@ -21,7 +20,7 @@ const StartUpScreen = () => {
                     onPress={() => navigation.navigate('Login')}
                 >
                     <Text style={tw`text-center text-lg font-bold`}>
-                        Login
+                        Enter
                     </Text>
                 </TouchableOpacity>
             </ImageBackground>
