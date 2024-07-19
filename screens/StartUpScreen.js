@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';
+import useChats from '../hooks/chatProvider';
 
 const StartUpScreen = () => {
     const navigation = useNavigation();
+    const { updateSubjects } = useChats();
+
+    useEffect(() => {
+        updateSubjects();
+    }, []); // Only run this effect on initial mount or if these values change
 
     return (
         <View style={tw`flex-1 bg-black`}>

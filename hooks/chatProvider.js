@@ -173,7 +173,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`https://edumind-3587039ec3f2.herokuapp.com/v1/subjects`, {
+      const response = await axios.get(`https://edumind-3587039ec3f2.herokuapp.com/v1/subjects`, {
       });
       if (response.status === 200) {
         console.log("subjects fetched " + response.data);
@@ -202,6 +202,7 @@ export const ChatsProvider = ({ children }) => {
       newMessage, 
       tutorGetChats,
       tutorAccept,
+      updateSubjects,
       loading, 
       error }}>
       {children}
