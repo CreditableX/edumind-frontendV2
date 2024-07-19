@@ -54,7 +54,7 @@ const StudentHomeScreen = () => {
     <SafeAreaView style={tw`flex-1`}>
       {/* Header */}
       <View style={tw`flex-row items-center justify-between px-5`}>
-        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+        <TouchableOpacity onPress={() => navigation.navigate("StudentProfile")}>
           <Image
             style={tw`h-10 w-10 rounded-full`}
             source={{ uri: "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" }} // change to user image when complete

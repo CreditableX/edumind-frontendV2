@@ -30,21 +30,14 @@ const StudentSingleChatScreen = () => {
 
   const MessageItem = ({ message }) => {
     // Determine if the message is sent by the current user or received
-    const isSentByCurrentUser = message.user_id == userId; // Replace with your logic
+    const isSentByCurrentUser = message.user_id === userId; // Replace with your logic
 
     return (
-      <View style={[tw`flex-row justify-end`, isSentByCurrentUser ? tw`items-end` : tw`items-start`]}>
-        <Card style={[tw`m-2 p-2 rounded-lg shadow-md`, isSentByCurrentUser ? tw`bg-blue-500` : tw`bg-gray-300`]}>
-          <View style={tw`flex-row items-center`}>
-            {!isSentByCurrentUser && (
-              <Image source={require('../assets/edumind.png')} style={tw`w-12 h-12 rounded-full`} />
-            )}
-            <View style={[tw`ml-2`, isSentByCurrentUser ? tw`items-end` : tw`items-start`]}>
-              <Text style={[tw`text-sm text-white`, !isSentByCurrentUser && tw`text-gray-700`]}>
-                {message.content}
-              </Text>
-            </View>
-          </View>
+      <View style={[tw`m-2`, isSentByCurrentUser ? tw`self-end` : tw`self-start`]}>
+        <Card style={[tw`p-2 rounded-lg shadow-md`, isSentByCurrentUser ? tw`bg-blue-500` : tw`bg-gray-300`]}>
+          <Text style={[tw`text-sm`, isSentByCurrentUser ? tw`text-white` : tw`text-gray-700`]}>
+            {message.content}
+          </Text>
         </Card>
       </View>
     );

@@ -10,6 +10,7 @@ export const ChatsProvider = ({ children }) => {
   const { username, token } = useAuth();
   const [chats, setChats] = useState(null);
   const [singleChatId, setSingleChatId] = useState(null);
+  const [subjectList, setSubjectList] = useState(null);
   const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -163,6 +164,26 @@ export const ChatsProvider = ({ children }) => {
     } catch (err) {
       setError(err.response?.data?.message || err.message);
       console.error('Question accept error:', err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const updateSubjects = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.post(`https://edumind-3587039ec3f2.herokuapp.com/v1/subjects`, {
+      });
+      if (response.status === 200) {
+        console.log("subjects fetched " + response.data);
+        setSubjectList(response.data);
+      } else {
+        throw new Error('Failed to fetch subjects');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Subject fetch error:', err);
     } finally {
       setLoading(false);
     }

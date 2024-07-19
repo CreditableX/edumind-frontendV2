@@ -29,7 +29,7 @@ const StudentProfileScreen = () => {
                 Update Details
             </Button>
             <Button
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => navigation.navigate('StudentHome')}
                 mode="contained"
                 style={tw`mb-2`}
             >
