@@ -9,23 +9,23 @@ import { Card, StyleSheet, Title, Button } from 'react-native-paper'
 
 
 const BrowseQuestionsScreen = () => {
-  const { getChats, chats, updateSingleChatId } = useChats();
+  const { tutorGetChats, chats, updateSingleChatId } = useChats();
   const { userType } = useAuth();
 
   const navigation = useNavigation();
 
   useEffect(() => {
-    getChats(); // Fetch chats when the component mounts
+    tutorGetChats(); // Fetch chats when the component mounts
   }, []);
 
-  const moveToSingleChat = (id) => {
+  const moveToAcceptQuestion = (id) => {
     updateSingleChatId(id);
-    navigation.navigate("SingleChat");
+    navigation.navigate("AcceptQuestion");
   }
 
   const ChatItem = ({ chat }) => {
     return (
-      <TouchableOpacity onPress={() => moveToSingleChat(chat.chat_id)} style={tw`p-4 border-b border-gray-400`}>
+      <TouchableOpacity onPress={() => moveToAcceptQuestion(chat.chat_id)} style={tw`p-4 border-b border-gray-400`}>
         <Card style={tw`m-2 p-2 rounded-lg shadow-md`}>
           <View style={tw`flex-row items-center`}>
             <Image source={require('../../assets/edumind.png')} style={tw`w-16 h-16 rounded-full m-2`} />
@@ -55,6 +55,9 @@ const BrowseQuestionsScreen = () => {
       </View>
 
       <View style={tw`mt-4 w-full p-5`}>
+        <Button title="Create new chat" mode="contained" onPress={() => navigation.navigate('NewChat')} style={tw`mb-1`}>
+          Create new chat
+        </Button>
         <Button title="Home" mode="contained" onPress={() => userType == 'student' ? navigation.navigate('StudentHome') : navigation.navigate('TutorHome')} style={tw`mb-1`}>
           Home
         </Button>

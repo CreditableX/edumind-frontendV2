@@ -8,7 +8,7 @@ import tw from 'twrnc';
 import { Card, StyleSheet, Title, Button } from 'react-native-paper'
 import useAuth from '../hooks/useAuth';
 
-const SingleChatScreen = () => {
+const StudentSingleChatScreen = () => {
   const { singleChatId, getMessages, newMessage, messages } = useChats();
   const { userId, userType } = useAuth();
   const [newMessageContent, setNewMessageContent] = useState('');
@@ -90,4 +90,4 @@ const SingleChatScreen = () => {
   );
 };
 
-export default SingleChatScreen
+export default StudentSingleChatScreen

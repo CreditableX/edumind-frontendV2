@@ -36,7 +36,7 @@ const NewChatScreen = () => {
                         console.log('topic is ' + topic)
                         console.log('header is ' + header)
                         await newChat(1, header, imageLink, message);
-                        navigation.navigate('Chat'); // go to chats screen
+                        navigation.navigate('StudentChat'); // go to chats screen
                     } catch (error) {
                         Alert.alert('Chat creation error', error.message); // Display error message if chat creation fails
                     }
@@ -74,7 +74,7 @@ const NewChatScreen = () => {
             <View style={tw`absolute top-10 left-0`}>
                 <Button
                     icon="arrow-left"
-                    onPress={() => navigation.navigate('Home')}
+                    onPress={() => navigation.navigate('StudentHome')}
                     style={tw`rounded-l`} // Increase padding and use rounded corners
                     contentStyle={tw`py-2 px-6`} // Adjust padding inside the button
                 />

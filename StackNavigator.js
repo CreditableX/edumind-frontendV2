@@ -8,13 +8,14 @@ import SignupScreen from './screens/SignupScreen';
 import NewChatScreen from './screens/student/NewChatScreen';
 import useAuth from './hooks/useAuth';
 import StartUpScreen from './screens/StartUpScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import StudentProfileScreen from './screens/student/StudentProfileScreen';
 import SingleChatScreen from './screens/SingleChatScreen';
-import NewNameScreen from './screens/NewNameScreen';
-import NewUsernameScreen from './screens/NewUsernameScreen';
 import ChangeDetailsScreen from './screens/ChangeDetailsScreen';
 import TutorHomeScreen from './screens/tutor/TutorHomeScreen';
+import TutorProfileScreen from './screens/tutor/TutorProfileScreen';
 import BrowseQuestionsScreen from './screens/tutor/BrowseQuestionsScreen';
+import TutorChatScreen from './screens/tutor/TutorChatScreen';
+import AcceptQuestionScreen from './screens/tutor/AcceptQuestionScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -39,24 +40,23 @@ const StackNavigator = () => {
             <Stack.Screen name="StudentHome" component={StudentHomeScreen} />
             <Stack.Screen name="StudentChat" component={StudentChatScreen} />
             <Stack.Screen name="NewChat" component={NewChatScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="StudentProfile" component={StudentProfileScreen} />
             <Stack.Screen name="SingleChat" component={SingleChatScreen} />
-            <Stack.Screen name="NewName" component={NewNameScreen} />
-            <Stack.Screen name="NewUsername" component={NewUsernameScreen} />
             <Stack.Screen name="ChangeDetails" component={ChangeDetailsScreen} />
           </>
         ) : userType == 'tutor' ? (
           <>
             <Stack.Screen name="TutorHome" component={TutorHomeScreen} />
-            <Stack.Screen name="Chat" component={ChatScreen} />
+            <Stack.Screen name="TutorChat" component={TutorChatScreen} />
             <Stack.Screen name="BrowseQuestions" component={BrowseQuestionsScreen} />
-            <Stack.Screen name="Profile" component={ProfileScreen} />
+            <Stack.Screen name="TutorProfile" component={TutorProfileScreen} />
             <Stack.Screen name="SingleChat" component={SingleChatScreen} />
-            <Stack.Screen name="NewName" component={NewNameScreen} />
-            <Stack.Screen name="NewUsername" component={NewUsernameScreen} />
             <Stack.Screen name="ChangeDetails" component={ChangeDetailsScreen} />
+            <Stack.Screen name="AcceptQuestion" component={AcceptQuestionScreen} />
           </>
-        ) : null
+        ) : (
+          <Stack.Screen name="Default" component={DefaultScreen} />
+        )
       ) : (
         <>
           <Stack.Screen name="StartUp" component={StartUpScreen} />
@@ -67,5 +67,11 @@ const StackNavigator = () => {
     </Stack.Navigator>
   );
 };
+
+const DefaultScreen = () => (
+  <View>
+    <Text>Loading...</Text>
+  </View>
+);
 
 export default StackNavigator;

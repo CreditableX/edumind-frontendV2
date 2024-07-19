@@ -55,9 +55,6 @@ const TutorChatScreen = () => {
       </View>
 
       <View style={tw`mt-4 w-full p-5`}>
-        <Button title="Create new chat" mode="contained" onPress={() => navigation.navigate('NewChat')} style={tw`mb-1`}>
-          Create new chat
-        </Button>
         <Button title="Home" mode="contained" onPress={() => userType == 'student' ? navigation.navigate('StudentHome') : navigation.navigate('TutorHome')} style={tw`mb-1`}>
           Home
         </Button>

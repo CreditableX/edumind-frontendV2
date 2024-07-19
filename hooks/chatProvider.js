@@ -35,11 +35,30 @@ export const ChatsProvider = ({ children }) => {
     };
   }, [token]); // Re-run the effect if the token changes
 
+  // student version
   const getChats = async () => {
     setLoading(true);
     setError(null);
     try {
       const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/chats');
+      if (response.status === 200) {
+        setChats(response.data);
+      } else {
+        throw new Error('Failed to fetch chats');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Get chats error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  const tutorGetChats = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/chats/pending');
       if (response.status === 200) {
         setChats(response.data);
       } else {
@@ -118,7 +137,7 @@ export const ChatsProvider = ({ children }) => {
       if (response.status === 201) {
         console.log("message put success");
       } else {
-        throw new Error('Failed to fetch messages');
+        throw new Error('Failed to put messages');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -128,8 +147,42 @@ export const ChatsProvider = ({ children }) => {
     }
   }
 
+  const tutorAccept = async () => {
+    if (!singleChatId) return;
+
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(`https://edumind-3587039ec3f2.herokuapp.com/v1/chats/${singleChatId}/accept`, {
+      });
+      if (response.status === 200) {
+        console.log("question accepted");
+      } else {
+        throw new Error('Failed to accept question');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Question accept error:', err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
-    <ChatsContext.Provider value={{ chats, singleChatId, messages, setSingleChatId, getChats, newChat, getMessages, updateSingleChatId, newMessage, loading, error }}>
+    <ChatsContext.Provider value={{ 
+      chats, 
+      singleChatId, 
+      messages, 
+      setSingleChatId, 
+      getChats, 
+      newChat, 
+      getMessages, 
+      updateSingleChatId, 
+      newMessage, 
+      tutorGetChats,
+      tutorAccept,
+      loading, 
+      error }}>
       {children}
     </ChatsContext.Provider>
   );

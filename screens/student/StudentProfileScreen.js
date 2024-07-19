@@ -2,11 +2,11 @@ import { View, Text, Image } from 'react-native'
 import { Button } from 'react-native-paper'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import useAuth from '../hooks/useAuth'
+import useAuth from '../../hooks/useAuth'
 import { useNavigation } from '@react-navigation/core';
 import tw from 'twrnc';
 
-const ProfileScreen = () => {
+const StudentProfileScreen = () => {
     const { username, name, email } = useAuth();
     const navigation = useNavigation();
 
@@ -39,4 +39,4 @@ const ProfileScreen = () => {
     )
 }
 
-export default ProfileScreen;
+export default StudentProfileScreen;
