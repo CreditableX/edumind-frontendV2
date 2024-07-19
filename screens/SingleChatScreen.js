@@ -10,7 +10,7 @@ import useAuth from '../hooks/useAuth';
 
 const SingleChatScreen = () => {
   const { singleChatId, getMessages, newMessage, messages } = useChats();
-  const { userId } = useAuth();
+  const { userId, userType } = useAuth();
   const [newMessageContent, setNewMessageContent] = useState('');
   const navigation = useNavigation();
 
@@ -55,7 +55,7 @@ const SingleChatScreen = () => {
         <View style={tw`flex-row items-center justify-between p-4`}>
           <Button
               icon="arrow-left"
-              onPress={() => navigation.navigate('Home')}
+              onPress={() => userType == 'student' ? navigation.navigate('StudentHome') : navigation.navigate('TutorHome')}
               style={tw`rounded-l`} // Increase padding and use rounded corners
               contentStyle={tw`py-2 px-6`} // Adjust padding inside the button
           />

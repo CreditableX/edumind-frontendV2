@@ -86,9 +86,10 @@ export const AuthProvider = ({ children }) => {
         // Assuming the API returns user data upon successful login
         // console.log(response.data.token);
         await setUserType('student');
+        await setToken(response.data.token);
         setName(response.data.student.name);
         setUsername(response.data.student.username);
-        setToken(response.data.token);
+        
         setEmail(response.data.student.email);
         setUserId(response.data.student.student_id);
 

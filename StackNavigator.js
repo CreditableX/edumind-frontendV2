@@ -1,11 +1,11 @@
 import { View, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import StudentHomeScreen from './screens/StudentHomeScreen';
-import ChatScreen from './screens/ChatScreen';
+import StudentHomeScreen from './screens/student/StudentHomeScreen';
+import StudentChatScreen from './screens/student/StudentChatScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
-import NewChatScreen from './screens/NewChatScreen';
+import NewChatScreen from './screens/student/NewChatScreen';
 import useAuth from './hooks/useAuth';
 import StartUpScreen from './screens/StartUpScreen';
 import ProfileScreen from './screens/ProfileScreen';
@@ -13,8 +13,8 @@ import SingleChatScreen from './screens/SingleChatScreen';
 import NewNameScreen from './screens/NewNameScreen';
 import NewUsernameScreen from './screens/NewUsernameScreen';
 import ChangeDetailsScreen from './screens/ChangeDetailsScreen';
-import TutorHomeScreen from './screens/TutorHomeScreen';
-import PhotoTestScreen from './screens/PhotoTest';
+import TutorHomeScreen from './screens/tutor/TutorHomeScreen';
+import BrowseQuestionsScreen from './screens/tutor/BrowseQuestionsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,7 +37,7 @@ const StackNavigator = () => {
         userType == 'student' ? (
           <>
             <Stack.Screen name="StudentHome" component={StudentHomeScreen} />
-            <Stack.Screen name="Chat" component={ChatScreen} />
+            <Stack.Screen name="StudentChat" component={StudentChatScreen} />
             <Stack.Screen name="NewChat" component={NewChatScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="SingleChat" component={SingleChatScreen} />
@@ -49,7 +49,7 @@ const StackNavigator = () => {
           <>
             <Stack.Screen name="TutorHome" component={TutorHomeScreen} />
             <Stack.Screen name="Chat" component={ChatScreen} />
-            <Stack.Screen name="NewChat" component={NewChatScreen} />
+            <Stack.Screen name="BrowseQuestions" component={BrowseQuestionsScreen} />
             <Stack.Screen name="Profile" component={ProfileScreen} />
             <Stack.Screen name="SingleChat" component={SingleChatScreen} />
             <Stack.Screen name="NewName" component={NewNameScreen} />

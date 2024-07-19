@@ -3,11 +3,11 @@ import { Button, Card, Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import React, { useLayoutEffect } from 'react'
 import { useNavigation } from '@react-navigation/core';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import { useState } from 'react';
 import tw from 'twrnc';
 import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons'
-import images from '../assets/images';
+import images from '../../assets/images';
 
 const TutorHomeScreen = () => {
   const navigation = useNavigation();
@@ -34,7 +34,7 @@ const TutorHomeScreen = () => {
 
         <TouchableOpacity>
           <Image
-            style={tw`h-14 w-25`} source={require("../assets/edumind.png")}
+            style={tw`h-14 w-25`} source={require("../../assets/edumind.png")}
           />
         </TouchableOpacity>
 
@@ -48,7 +48,7 @@ const TutorHomeScreen = () => {
         <Card.Content style={tw`items-center`}>
           <Button
             mode="contained"
-            onPress={() => navigation.navigate("NewChat")}
+            onPress={() => navigation.navigate("BrowseQuestions")}
             style={tw`my-4 rounded-lg w-36 h-12 justify-center`}
             labelStyle={tw`text-white text-lg`}
           >
@@ -57,10 +57,6 @@ const TutorHomeScreen = () => {
           <Text style={tw`mt-1 text-base`}>Browse available questions</Text>
         </Card.Content>
       </Card>
-
-      <Button title="Testing" icon="upload" mode="contained" onPress={() => navigation.navigate("Home")}>
-        Main home
-      </Button>
 
       <Button title="Log Out" icon="upload" mode="contained" onPress={() => handleLogOut()}>
         Logout
