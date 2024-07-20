@@ -21,10 +21,6 @@ const StudentChangeDetailsScreen = () => {
     console.log("name is" + name);
 
     useEffect(() => {
-        // console.log("Name from useAuth:", name);
-        // console.log("Username from useAuth:", username);
-        // console.log("Email from useAuth:", email);
-
         // Set the initial state when the component mounts
         setNewName(name);
         setNewUsername(username);
