@@ -4,7 +4,7 @@ import { Button } from 'react-native-paper'
 import useAuth from '../../hooks/useAuth';
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';
-import useUserProfile, { UserProfileProvider } from '../../hooks/userProfileProvider';
+import useUserProfile from '../../hooks/userProfileProvider';
 import { useEffect } from 'react';
 
 const TutorChangeDetailsScreen = () => {
@@ -21,9 +21,6 @@ const TutorChangeDetailsScreen = () => {
     console.log("name is" + name);
 
     useEffect(() => {
-        // console.log("Name from useAuth:", name);
-        // console.log("Username from useAuth:", username);
-        // console.log("Email from useAuth:", email);
 
         // Set the initial state when the component mounts
         setNewName(name);

@@ -24,13 +24,6 @@ const LoginScreen = () => {
     } catch (error) {
       console.error('Login error:', error); // Handle login error
     }
-
-    
-    // if (isTutor) {
-    //   navigation.navigate('TutorHome'); // Navigate to home page if successful
-    // } else {
-    //   navigation.navigate('StudentHome'); // Navigate to home page if successful
-    // }
   };
 
   return (
