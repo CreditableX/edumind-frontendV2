@@ -5,17 +5,19 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import useAuth from '../../hooks/useAuth'
 import { useNavigation } from '@react-navigation/core';
 import tw from 'twrnc';
+import useChats from '../../hooks/chatProvider'
 
 const TutorProfileScreen = () => {
     const { username, name, email, subjects } = useAuth();
+    const { subjectList } = useChats();
     const navigation = useNavigation();
 
     const subjectString = () => {
         if (subjects) {
             repStr = ''
             for (i = 0; i < subjects.length; i++) {
-                console.log(subjects[i].subject_id);
-                repStr += `${subjects[i].subject_id}` + ' | ' + `Years: ${subjects[i].yoe}` + "\n";           
+                currId = subjects[i].subject_id;
+                repStr += `${subjectList[currId].name}` + ' | ' + `Years: ${subjects[i].yoe}` + "\n";           
             }
             return repStr;
         } else {
