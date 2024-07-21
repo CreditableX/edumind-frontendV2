@@ -25,6 +25,7 @@ const LoginScreen = () => {
       console.error('Login error:', error); // Handle login error
     }
 
+    
     // if (isTutor) {
     //   navigation.navigate('TutorHome'); // Navigate to home page if successful
     // } else {
@@ -66,10 +67,10 @@ const LoginScreen = () => {
             <Button title="Login" onPress={handleLogin} />
           </View>
           <View style={tw`flex-1 ml-2`}>
-            <Button title="Signup (Student)" onPress={() => navigation.navigate("SignupStudent")} />
+            <Button title="Signup (Student)" onPress={() => navigation.navigate("StudentSignup")} />
           </View>
           <View style={tw`flex-1 ml-2`}>
-            <Button title="Signup (Tutor)" onPress={() => navigation.navigate("SignupTutor")} />
+            <Button title="Signup (Tutor)" onPress={() => navigation.navigate("TutorSignup")} />
           </View>
         </View>
       </View>

@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // tutor signup
-  const tutorSignup = async (username, password, name, subjects, email) => {
+  const tutorSignup = async (username, password, name, subjects, email, photoUrl) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
@@ -53,7 +53,8 @@ export const AuthProvider = ({ children }) => {
         password,
         name,
         subjects,
-        email
+        email,
+        photoUrl
       });
 
       if (response.status === 201) {

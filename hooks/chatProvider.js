@@ -193,7 +193,8 @@ export const ChatsProvider = ({ children }) => {
     <ChatsContext.Provider value={{ 
       chats, 
       singleChatId, 
-      messages, 
+      messages,
+      subjectList,
       setSingleChatId, 
       getChats, 
       newChat, 

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert } from 'react-native';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';
 
-const SignupStudentScreen = () => {
+const StudentSignupScreen = () => {
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -58,4 +58,4 @@ const SignupStudentScreen = () => {
     );
 }
 
-export default SignupStudentScreen
+export default StudentSignupScreen

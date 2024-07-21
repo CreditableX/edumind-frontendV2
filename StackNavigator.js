@@ -4,8 +4,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import StudentHomeScreen from './screens/student/StudentHomeScreen';
 import StudentChatScreen from './screens/student/StudentChatScreen';
 import LoginScreen from './screens/LoginScreen';
-import SignupStudentScreen from './screens/SignupStudentScreen';
-import SignupTutorScreen from './screens/SignupTutorScreen';
 import NewChatScreen from './screens/student/NewChatScreen';
 import useAuth from './hooks/useAuth';
 import StartUpScreen from './screens/StartUpScreen';
@@ -18,6 +16,8 @@ import TutorChangeDetailsScreen from './screens/tutor/TutorChangeDetailsScreen';
 import BrowseQuestionsScreen from './screens/tutor/BrowseQuestionsScreen';
 import TutorChatScreen from './screens/tutor/TutorChatScreen';
 import AcceptQuestionScreen from './screens/tutor/AcceptQuestionScreen';
+import StudentSignupScreen from './screens/student/StudentSignupScreen';
+import TutorSignupScreen from './screens/tutor/TutorSignupScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -63,8 +63,8 @@ const StackNavigator = () => {
         <>
           <Stack.Screen name="StartUp" component={StartUpScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="SignupStudent" component={SignupStudentScreen} />
-          <Stack.Screen name="SignupTutor" component={SignupTutorScreen} />
+          <Stack.Screen name="StudentSignup" component={StudentSignupScreen} />
+          <Stack.Screen name="TutorSignup" component={TutorSignupScreen} />
         </>
       )}
     </Stack.Navigator>
