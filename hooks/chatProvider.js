@@ -15,6 +15,7 @@ export const ChatsProvider = ({ children }) => {
   const [subjectList, setSubjectList] = useState(null);
   const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [photoUrl, setPhotoUrl] = useState(null);
   const [error, setError] = useState(null);
 
   // Setting up Axios interceptor to include token in all requests
@@ -38,20 +39,22 @@ export const ChatsProvider = ({ children }) => {
     };
   }, [token]); // Re-run the effect if the token changes
 
-  // student version
+  // main version after chats accepted / default for
   const getChats = async () => {
     setLoading(true);
     setError(null);
     try {
       const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/chats');
+      await new Promise(resolve => setTimeout(resolve, 2000)); // 2 seconds delay
       if (response.status === 200) {
+        
         setChats(response.data);
       } else {
         throw new Error('Failed to fetch chats');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
-      console.error('Get chats error:', err);
+      console.error('Student get chats error:', err);
     } finally {
       setLoading(false);
     }
@@ -69,7 +72,7 @@ export const ChatsProvider = ({ children }) => {
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
-      console.error('Get chats error:', err);
+      console.error('Tutor get chats error:', err);
     } finally {
       setLoading(false);
     }
@@ -102,7 +105,8 @@ export const ChatsProvider = ({ children }) => {
 
   const getMessages = async () => {
     if (!singleChatId) return;
-
+    
+    console.log("single chat is " + singleChatId);
     setLoading(true);
     setError(null);
     try {
@@ -126,24 +130,28 @@ export const ChatsProvider = ({ children }) => {
     setMessages(null);
     setSingleChatId(id);
 
-
     try {
       // need this response to update student and tutor id
+      console.log("here ");
       const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/chats');
       if (response.status === 200) {
         const chat = response.data.find(chat => chat._id === id);
+        console.log("chat is " + chat);
         setSingleChatStudentId(chat.student_id);
         setSingleChatTutorId(chat.tutor_id);
+        setPhotoUrl(chat.photo_url);
       } else {
-        throw new Error('Failed to fetch chats');
+        throw new Error('Failed to update chat ID');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
-      console.error('Get chats error:', err);
+      console.error('Update chat ID error:', err);
     } finally {
       setLoading(false);
     }
-    console.log("updating single chat id: " + id);
+
+    console.log("updated single chat id: " + id);
+
   }
 
   const newMessage = async (content) => {
@@ -217,6 +225,7 @@ export const ChatsProvider = ({ children }) => {
       subjectList,
       singleChatStudentId,
       singleChatTutorId,
+      photoUrl,
       setSingleChatId, 
       getChats, 
       newChat, 

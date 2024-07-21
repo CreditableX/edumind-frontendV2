@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, Alert, ImageBackground } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import useAuth from '../hooks/useAuth';
@@ -9,17 +9,25 @@ const LoginScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isTutor, setIsTutor] = useState(false);
-  const { studentLogin, tutorLogin } = useAuth();
+  const { studentLogin, tutorLogin, userType, token, name, email, userId } = useAuth();
   const navigation = useNavigation();
+
+  useEffect(() => {
+    if (userType && token && name && email && userId) {
+      if (userType === 'student') {
+        navigation.navigate('StudentHome');
+      } else if (userType === 'tutor') {
+        navigation.navigate('TutorHome');
+      }
+    }
+  }, [userType, token, name, email, userId]);
 
   const handleLogin = async () => {
     try {
       if (isTutor) {
         await tutorLogin(username, password);
-        navigation.navigate('TutorHome');
       } else {
         await studentLogin(username, password); // Student login
-        navigation.navigate('StudentHome');
       }
     } catch (error) {
       console.error('Login error:', error); // Handle login error

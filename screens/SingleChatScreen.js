@@ -8,8 +8,8 @@ import tw from 'twrnc';
 import { Card, StyleSheet, Title, Button } from 'react-native-paper'
 import useAuth from '../hooks/useAuth';
 
-const StudentSingleChatScreen = () => {
-  const { singleChatId, getMessages, newMessage, messages } = useChats();
+const SingleChatScreen = () => {
+  const { singleChatId, getMessages, newMessage, messages, photoUrl } = useChats();
   const { userId, userType } = useAuth();
   const [newMessageContent, setNewMessageContent] = useState('');
   const navigation = useNavigation();
@@ -25,7 +25,15 @@ const StudentSingleChatScreen = () => {
   };
 
   useEffect(() => {
-      getMessages();
+    const fetchMessages = async () => {
+      try {
+        await getMessages(); // assuming getMessages is an async function
+      } catch (error) {
+        console.error('Error fetching messages:', error);
+      }
+    };
+
+    fetchMessages();
   }, [singleChatId]);
 
   const MessageItem = ({ message }) => {
@@ -45,15 +53,30 @@ const StudentSingleChatScreen = () => {
 
   return (
     <SafeAreaView style={tw`flex-1`}>
-        <View style={tw`flex-row items-center justify-between p-4`}>
-          <Button
-              icon="arrow-left"
-              onPress={() => userType == 'student' ? navigation.navigate('StudentHome') : navigation.navigate('TutorHome')}
-              style={tw`rounded-l`} // Increase padding and use rounded corners
-              contentStyle={tw`py-2 px-6`} // Adjust padding inside the button
+      <View style={tw`flex-row items-center justify-between p-4`}>
+        <Button
+          icon="arrow-left"
+          onPress={() => userType == 'student' ? navigation.navigate('StudentHome') : navigation.navigate('TutorHome')}
+          style={tw`rounded-l`} // Increase padding and use rounded corners
+          contentStyle={tw`py-2 px-6`} // Adjust padding inside the button
+        />
+        <Text>{userType === 'student' ? 'Tutor Name' : 'Student Name'}</Text>
+        <Text>{userType === 'student' ? 'Tutor Pic' : 'Student Pic'}</Text>
+      </View>
+
+      <View style={tw`items-center justify-center flex-1`}>
+        {photoUrl ? (
+          <Image
+            source={{ uri: photoUrl }}
+            style={{
+              width: screenWidth / 3,
+              height: screenWidth / 3,
+              resizeMode: 'contain'
+            }}
           />
-          <Text>Tutor name goes here </Text>
-          <Text>Tutor picture</Text>
+        ) : (
+          <Text style={tw`text-center`}>No Picture Available</Text>
+        )}
       </View>
 
       <View style={tw`flex-1`}>
@@ -83,4 +106,4 @@ const StudentSingleChatScreen = () => {
   );
 };
 
-export default StudentSingleChatScreen
+export default SingleChatScreen

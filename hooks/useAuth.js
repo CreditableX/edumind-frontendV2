@@ -82,19 +82,17 @@ export const AuthProvider = ({ children }) => {
         password
       });
       if (response.status === 200) {
-
         console.log("login successful");
         // Assuming the API returns user data upon successful login
         // console.log(response.data.token);
-        await setUserType('student');
-        await setToken(response.data.token);
+        setUserType('student');
+        setToken(response.data.token);
         setName(response.data.student.name);
         setUsername(response.data.student.username);
         
         setEmail(response.data.student.email);
         setUserId(response.data.student.student_id);
 
-        console.log(response.data);
         console.log("login name is " + name);
         console.log("login username is " + username);
         console.log("login email is " + email);
@@ -128,8 +126,8 @@ export const AuthProvider = ({ children }) => {
 
         // Assuming the API returns user data upon successful login
         // console.log(response.data.token);  
-        await setToken(response.data.token);
-        await setSubjects(response.data.tutor.subjects);
+        setToken(response.data.token);
+        setSubjects(response.data.tutor.subjects);
         setName(response.data.tutor.name);
         setUsername(response.data.tutor.username);
         setEmail(response.data.tutor.email);
@@ -137,7 +135,6 @@ export const AuthProvider = ({ children }) => {
         
 
         console.log("usertpye is " + userType);
-        console.log(response.data);
         console.log("login name is " + name);
         console.log("login username is " + username);
         console.log("login email is " + email);
