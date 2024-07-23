@@ -63,8 +63,25 @@ const TutorSignupScreen = () => {
     };
 
     const handleSignup = async () => {
+        if (image != null) {
+            try {
+                // console.log("image " + image)
+                const compressedImage = await compressImage(image);
+                try {
+                    const response = await uploadToCloudinary(compressedImage, "default");
+                    setPhotoUrl(response.url);
+                } catch (uploadError) {
+                    console.error("Upload failed:", uploadError);
+                    Alert.alert("Image uploading failed");
+                    return;
+                }
+            } catch (error) {
+                console.error("Image compression failed:", error);
+                Alert.alert("Image compression failed");
+                return;
+            }
+        }
         try {
-            console.log("subks" + subjects);
             await tutorSignup(username, password, name, subjects , email, photoUrl);
             navigation.navigate('Login'); // go to login screen
         } catch (error) {

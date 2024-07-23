@@ -11,8 +11,11 @@ export const AuthProvider = ({ children }) => {
   const [userId, setUserId] = useState(null);
   const [loading, setLoading] = useState(false);
   const [userType, setUserType] = useState(null);
+  const [rating, setRating] = useState(0);
+  const [ratingCount, setRatingCount] = useState(0);
   const [error, setError] = useState(null);
   const [subjects, setSubjects] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(null);
   const [token, setToken] = useState(null); // Authentication token
 
   // student signup 
@@ -44,7 +47,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // tutor signup
-  const tutorSignup = async (username, password, name, subjects, email, photoUrl) => {
+  const tutorSignup = async (username, password, name, subjects, email, photo_url) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
@@ -54,7 +57,7 @@ export const AuthProvider = ({ children }) => {
         name,
         subjects,
         email,
-        photoUrl
+        photo_url
       });
 
       if (response.status === 201) {
@@ -92,6 +95,7 @@ export const AuthProvider = ({ children }) => {
         
         setEmail(response.data.student.email);
         setUserId(response.data.student.student_id);
+        setPhotoUrl(response.data.student.photo_url);
 
         console.log("login name is " + name);
         console.log("login username is " + username);
@@ -132,6 +136,9 @@ export const AuthProvider = ({ children }) => {
         setUsername(response.data.tutor.username);
         setEmail(response.data.tutor.email);
         setUserId(response.data.tutor.tutor_id);
+        setRating(response.data.tutor.rating);
+        setRatingCount(response.data.tutor.rating_count);
+        setPhotoUrl(response.data.tutor.photo_url);
         
 
         console.log("usertpye is " + userType);
@@ -177,6 +184,9 @@ export const AuthProvider = ({ children }) => {
         userId,
         userType,
         subjects,
+        rating,
+        ratingCount,
+        photoUrl,
         studentSignup,
         tutorSignup,
         studentLogin,
