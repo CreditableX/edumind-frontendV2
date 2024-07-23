@@ -28,7 +28,7 @@ const TutorHomeScreen = () => {
         <TouchableOpacity onPress={() => navigation.navigate("TutorProfile")}>
           <Image
             style={tw`h-10 w-10 rounded-full`}
-            source={{ uri: "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" }} // change to user image when complete
+            source={{ uri: photoUrl ? photoUrl : "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" }}
           />
         </TouchableOpacity>
 

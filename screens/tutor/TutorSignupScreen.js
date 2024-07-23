@@ -105,8 +105,15 @@ const TutorSignupScreen = () => {
 
     return (
         <View style={{ flex: 1 }}>
-
             <ScrollView contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={tw`flex-row items-center justify-between p-4`}>
+                <Button
+                    icon="arrow-left"
+                    onPress={() => navigation.navigate('Login')}
+                    style={tw`rounded-l`} // Increase padding and use rounded corners
+                    contentStyle={tw`py-2 px-6`} // Adjust padding inside the button
+                />
+                </View>
                 <Text style={tw`text-2xl mb-4`}>Sign up</Text>
                 <View style={tw`border-2 border-gray-400 p-3 rounded-lg w-80p items-center mb-6`}>
                     <Button icon="camera" onPress={pickImage}>

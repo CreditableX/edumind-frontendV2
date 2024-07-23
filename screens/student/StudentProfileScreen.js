@@ -22,7 +22,7 @@ const StudentProfileScreen = () => {
             <Text style={tw`text-xl font-bold`}>{name ? `Name: ${name}` : 'Could not load name'}</Text>
             <Text style={tw`text-xl font-bold`}>{email ? `Email: ${email}` : 'Could not load email'}</Text>
             <Button
-                onPress={() => navigation.navigate("ChangeDetails")}
+                onPress={() => navigation.navigate("StudentChangeDetails")}
                 mode="contained"
                 style={tw`mb-2`}
             >

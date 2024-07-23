@@ -62,7 +62,7 @@ const StudentChangeDetailsScreen = () => {
             <View style={tw`flex-row justify-between w-4/5`}>
                 <View style={tw`flex-1 ml-2 mb-5`}>
                     <Button title="Submit" mode="contained" style={tw`mb-1`} onPress={() => handleUpdateDetails(newName, newUsername, newEmail)}> Submit </Button>
-                    <Button title="Never Mind" mode="contained" style={tw`mb-1`}  onPress={() => navigation.navigate("Profile")}> Never Mind </Button>
+                    <Button title="Never Mind" mode="contained" style={tw`mb-1`}  onPress={() => navigation.navigate("StudentProfile")}> Never Mind </Button>
                 </View>
             </View>
         </View>

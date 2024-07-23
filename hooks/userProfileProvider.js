@@ -45,9 +45,6 @@ export const UserProfileProvider = ({ children }) => {
   const updateDetailsStudent = async (newUsername, newName, newEmail) => {
     setLoading(true);
     setError(null);
-    console.log('newname ' + newName);
-    console.log('newusername ' + newUsername);
-    console.log('newEmail ' + newEmail);
     try {
       const response = await axios.put('https://edumind-3587039ec3f2.herokuapp.com/v1/students/profile', {
         username: newUsername,
@@ -70,9 +67,6 @@ export const UserProfileProvider = ({ children }) => {
   const updateDetailsTutor = async (newUsername, newName, newEmail) => {
     setLoading(true);
     setError(null);
-    console.log('newname ' + newName);
-    console.log('newusername ' + newUsername);
-    console.log('newEmail ' + newEmail);
     try {
       const response = await axios.put('https://edumind-3587039ec3f2.herokuapp.com/v1/tutors/profile', {
         username: newUsername,
