@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 
 const StudentChangeDetailsScreen = () => {
     const { name, username, email } = useAuth();
-    const { updateDetails } = useUserProfile();
+    const { updateDetailsStudent } = useUserProfile();
     const navigation = useNavigation();
     const { logout } = useAuth();
 
@@ -29,7 +29,7 @@ const StudentChangeDetailsScreen = () => {
 
     const handleUpdateDetails = async (nameState, usernameState, emailState) => {
         try {
-            await updateDetails(nameState, usernameState, emailState);
+            await updateDetailsStudent(nameState, usernameState, emailState);
             Alert.alert('Profile updated successfully. Please relogin');
             logout(); // Logout user if successful
         } catch (error) {
@@ -42,19 +42,19 @@ const StudentChangeDetailsScreen = () => {
             <Text style={tw`mb-4 text-lg font-bold`}>Input the following details</Text>
             <TextInput
                 placeholder="Username"
-                value={username}
+                value={newUsername}
                 onChangeText={setNewUsername}
                 style={{ marginBottom: 16, borderWidth: 1, padding: 8, width: '80%' }}
             />
             <TextInput
                 placeholder="Name"
-                value={name}
+                value={newName}
                 onChangeText={setNewName}
                 style={{ marginBottom: 16, borderWidth: 1, padding: 8, width: '80%' }}
             />
             <TextInput
                 placeholder="Email"
-                value={email}
+                value={newEmail}
                 onChangeText={setNewEmail}
                 style={{ marginBottom: 16, borderWidth: 1, padding: 8, width: '80%' }}
             />

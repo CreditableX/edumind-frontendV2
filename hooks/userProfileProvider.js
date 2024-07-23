@@ -42,9 +42,12 @@ export const UserProfileProvider = ({ children }) => {
       };
     }, [token]); // Re-run the effect if the token changes
 
-  const updateDetails = async (newUsername, newName, newEmail) => {
+  const updateDetailsStudent = async (newUsername, newName, newEmail) => {
     setLoading(true);
     setError(null);
+    console.log('newname ' + newName);
+    console.log('newusername ' + newUsername);
+    console.log('newEmail ' + newEmail);
     try {
       const response = await axios.put('https://edumind-3587039ec3f2.herokuapp.com/v1/students/profile', {
         username: newUsername,
@@ -52,9 +55,32 @@ export const UserProfileProvider = ({ children }) => {
         email: newEmail
       });
       if (response.status === 200) {
-        setUsernameState(newUsername);
-        setNameState(newName);
-        setEmailState(newEmail);
+        console.log('updated profile');
+      } else {
+        throw new Error('Update failed');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Update username error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateDetailsTutor = async (newUsername, newName, newEmail) => {
+    setLoading(true);
+    setError(null);
+    console.log('newname ' + newName);
+    console.log('newusername ' + newUsername);
+    console.log('newEmail ' + newEmail);
+    try {
+      const response = await axios.put('https://edumind-3587039ec3f2.herokuapp.com/v1/tutors/profile', {
+        username: newUsername,
+        name: newName,
+        email: newEmail
+      });
+      if (response.status === 200) {
+        console.log('updated profile');
       } else {
         throw new Error('Update failed');
       }
@@ -67,7 +93,7 @@ export const UserProfileProvider = ({ children }) => {
   };
 
   return (
-    <UserProfileContext.Provider value={{ usernameState, nameState, emailState, updateDetails}}>
+    <UserProfileContext.Provider value={{ usernameState, nameState, emailState, updateDetailsStudent, updateDetailsTutor}}>
       {children}
     </UserProfileContext.Provider>
   );
