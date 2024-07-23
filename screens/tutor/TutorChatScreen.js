@@ -5,11 +5,11 @@ import useAuth from '../../hooks/useAuth'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tw from 'twrnc'
 import useChats from '../../hooks/chatProvider'
-import { Card, StyleSheet, Title, Button } from 'react-native-paper'
+import { Card, Title, Button } from 'react-native-paper'
 
 
 const TutorChatScreen = () => {
-  const { getChats, chats, updateSingleChatId } = useChats();
+  const { getChats, chats, updateSingleChatId, subjectList } = useChats();
   const { userType } = useAuth();
 
   const navigation = useNavigation();
@@ -20,6 +20,7 @@ const TutorChatScreen = () => {
 
   const moveToSingleChat = (id) => {
     updateSingleChatId(id);
+    // await new Promise(resolve => setTimeout(resolve, 7000)); // 2 seconds delay
     navigation.navigate("SingleChat");
   }
 
@@ -31,7 +32,7 @@ const TutorChatScreen = () => {
             <Image source={require('../../assets/edumind.png')} style={tw`w-16 h-16 rounded-full m-2`} />
             <View style={tw`flex-1 ml-2`}>
               <Title style={tw`text-lg font-bold`}>{chat.header}</Title>
-              <Text style={tw`text-gray-500 text-sm`}>{chat.subject}</Text>
+              <Text style={tw`text-gray-500 text-sm`}>{subjectList[chat.subject_id].name}</Text>
             </View>
           </View>
         </Card>

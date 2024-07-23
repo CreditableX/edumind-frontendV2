@@ -45,9 +45,7 @@ export const ChatsProvider = ({ children }) => {
     setError(null);
     try {
       const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/chats');
-      await new Promise(resolve => setTimeout(resolve, 2000)); // 2 seconds delay
       if (response.status === 200) {
-        
         setChats(response.data);
       } else {
         throw new Error('Failed to fetch chats');
@@ -126,32 +124,17 @@ export const ChatsProvider = ({ children }) => {
     }
   };
 
-  const updateSingleChatId = async (id) => {
+  const updateSingleChatId = (id) => {
     setMessages(null);
     setSingleChatId(id);
 
-    try {
-      // need this response to update student and tutor id
-      console.log("here ");
-      const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/chats');
-      if (response.status === 200) {
-        const chat = response.data.find(chat => chat._id === id);
-        console.log("chat is " + chat);
-        setSingleChatStudentId(chat.student_id);
-        setSingleChatTutorId(chat.tutor_id);
-        setPhotoUrl(chat.photo_url);
-      } else {
-        throw new Error('Failed to update chat ID');
-      }
-    } catch (err) {
-      setError(err.response?.data?.message || err.message);
-      console.error('Update chat ID error:', err);
-    } finally {
-      setLoading(false);
-    }
+    const chat = chats.find(chat => chat.chat_id === id);
+
+    setSingleChatStudentId(chat.student_id);
+    setSingleChatTutorId(chat.tutor_id);
+    setPhotoUrl(chat.photo_url);
 
     console.log("updated single chat id: " + id);
-
   }
 
   const newMessage = async (content) => {

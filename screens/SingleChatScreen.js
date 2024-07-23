@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableOpacity, Image, TextInput } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity, Image, TextInput, Dimensions } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/core';
@@ -51,6 +51,8 @@ const SingleChatScreen = () => {
     );
   };
 
+
+  const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
   return (
     <SafeAreaView style={tw`flex-1`}>
       <View style={tw`flex-row items-center justify-between p-4`}>
@@ -64,20 +66,20 @@ const SingleChatScreen = () => {
         <Text>{userType === 'student' ? 'Tutor Pic' : 'Student Pic'}</Text>
       </View>
 
-      <View style={tw`items-center justify-center flex-1`}>
-        {photoUrl ? (
-          <Image
-            source={{ uri: photoUrl }}
-            style={{
-              width: screenWidth / 3,
-              height: screenWidth / 3,
-              resizeMode: 'contain'
-            }}
-          />
-        ) : (
-          <Text style={tw`text-center`}>No Picture Available</Text>
-        )}
-      </View>
+      <View style={tw`flex-1 justify-center items-center`}>
+    {photoUrl ? (
+      <Image
+        source={{ uri: photoUrl }}
+        style={{
+          width: screenWidth * 2 / 3,  // Set width to 1/3 of screen width
+            height: screenWidth * 2 / 3, // Set height to 1/3 of screen width (keeping aspect ratio square)
+          resizeMode: 'contain'
+        }}
+      />
+    ) : (
+      <Text style={tw`text-center`}>No Picture Available</Text>
+    )}
+  </View>
 
       <View style={tw`flex-1`}>
         <FlatList

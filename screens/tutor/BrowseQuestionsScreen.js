@@ -31,7 +31,7 @@ const BrowseQuestionsScreen = () => {
             <Image source={require('../../assets/edumind.png')} style={tw`w-16 h-16 rounded-full m-2`} />
             <View style={tw`flex-1 ml-2`}>
               <Title style={tw`text-lg font-bold`}>{chat.header}</Title>
-              <Text style={tw`text-gray-500 text-sm`}>{chat.subject}</Text>
+              <Text style={tw`text-gray-500 text-sm`}>{chat.subject_id}</Text>
             </View>
           </View>
         </Card>
