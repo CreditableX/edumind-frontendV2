@@ -1,13 +1,12 @@
 // context/chats/ChatsProvider.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import useAuth from './useAuth';
-import { useEffect, useS } from 'react';
 
 const ChatsContext = createContext();
 
 export const ChatsProvider = ({ children }) => {
-  const { username, token } = useAuth();
+  const { token } = useAuth();
   const [chats, setChats] = useState(null);
   const [singleChatId, setSingleChatId] = useState(null);
   const [singleChatStudentId, setSingleChatStudentId] = useState(null);
@@ -39,7 +38,7 @@ export const ChatsProvider = ({ children }) => {
     };
   }, [token]); // Re-run the effect if the token changes
 
-  // main version after chats accepted / default for
+  // main version after chats accepted / default for student
   const getChats = async () => {
     setLoading(true);
     setError(null);
@@ -58,6 +57,7 @@ export const ChatsProvider = ({ children }) => {
     }
   };
   
+  // tutor pending chats
   const tutorGetChats = async () => {
     setLoading(true);
     setError(null);
@@ -76,11 +76,11 @@ export const ChatsProvider = ({ children }) => {
     }
   };
 
+  // create a new chat
   const newChat = async (subject_id, header, photo_url, content) => {
     setLoading(true);
     setError(null);
     try {
-      // console.log(subject_id + " " + header + " " + photo_url)
       const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/students/new-question', {
         subject_id,
         header,
@@ -101,7 +101,9 @@ export const ChatsProvider = ({ children }) => {
     }
   };
 
+  // fetch messages for a single chat
   const getMessages = async () => {
+    // some error handling
     if (!singleChatId) return;
     
     console.log("single chat is " + singleChatId);
@@ -110,7 +112,6 @@ export const ChatsProvider = ({ children }) => {
     try {
       const response = await axios.get(`https://edumind-3587039ec3f2.herokuapp.com/v1/chats/${singleChatId}`);
       if (response.status === 200) {
-        // Handle messages data
         console.log("ok got messages");
         setMessages(response.data)
       } else {
@@ -124,6 +125,7 @@ export const ChatsProvider = ({ children }) => {
     }
   };
 
+  // calls every time a single chat is entered
   const updateSingleChatId = (id) => {
     setMessages(null);
     setSingleChatId(id);
@@ -137,7 +139,9 @@ export const ChatsProvider = ({ children }) => {
     console.log("updated single chat id: " + id);
   }
 
+  // send a new message into a chat
   const newMessage = async (content) => {
+    // some error handling
     if (!singleChatId) return;
 
     setLoading(true);
@@ -159,7 +163,9 @@ export const ChatsProvider = ({ children }) => {
     }
   }
 
+  // tutor accepting a chat
   const tutorAccept = async () => {
+    // some error handling
     if (!singleChatId) return;
 
     setLoading(true);
@@ -180,6 +186,7 @@ export const ChatsProvider = ({ children }) => {
     }
   }
 
+  // list of subjects, updated when the app launches
   const updateSubjects = async () => {
     setLoading(true);
     setError(null);

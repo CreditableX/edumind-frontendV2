@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Alert, StyleSheet, Image } from 'react-native';
+import { View, Text, Alert, Image } from 'react-native';
 import { Button, TextInput } from "react-native-paper";
 import tw from 'twrnc';
 import useChats from '../../hooks/chatProvider';

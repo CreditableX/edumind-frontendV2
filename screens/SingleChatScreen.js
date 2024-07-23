@@ -1,11 +1,11 @@
-import { View, Text, FlatList, TouchableOpacity, Image, TextInput, Dimensions } from 'react-native'
+import { View, Text, FlatList, Image, TextInput, Dimensions } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/core';
 import { useEffect, useState } from 'react';
 import useChats from '../hooks/chatProvider';
 import tw from 'twrnc';
-import { Card, StyleSheet, Title, Button } from 'react-native-paper'
+import { Card, Button } from 'react-native-paper'
 import useAuth from '../hooks/useAuth';
 
 const SingleChatScreen = () => {

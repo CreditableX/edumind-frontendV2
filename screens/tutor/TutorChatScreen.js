@@ -1,4 +1,4 @@
-import { Text, View, Alert, FlatList, TouchableOpacity, Image } from 'react-native'
+import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
 import React, { useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import useAuth from '../../hooks/useAuth'

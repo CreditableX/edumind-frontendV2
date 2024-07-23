@@ -1,11 +1,10 @@
-import { View, Text, FlatList, TouchableOpacity, Image, TextInput } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/core';
-import { useEffect, useState } from 'react';
 import useChats from '../../hooks/chatProvider';
 import tw from 'twrnc';
-import { Card, StyleSheet, Title, Button } from 'react-native-paper'
+import { Button } from 'react-native-paper'
 import useAuth from '../../hooks/useAuth';
 
 const AcceptQuestionScreen = () => {

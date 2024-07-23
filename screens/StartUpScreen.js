@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';

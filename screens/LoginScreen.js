@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Alert, ImageBackground } from 'react-native';
+import { View, Text, TextInput, Button } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import useAuth from '../hooks/useAuth';
 import tw from 'twrnc';

@@ -1,6 +1,4 @@
-import { View, Text, Alert } from 'react-native'
-import React, { createContext, useContext, useEffect, useState } from 'react'
-import axios from 'axios';
+import React from 'react'
 import { AuthProvider } from './useAuth';
 import { ChatsProvider } from './chatProvider';
 import { UserProfileProvider } from './userProfileProvider';

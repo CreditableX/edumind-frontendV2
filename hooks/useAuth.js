@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 import axios from 'axios';
 
 const AuthContext = createContext({
@@ -23,7 +23,6 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
-      // Replace with your actual API endpoint
       const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/students/register', {
         username,
         password,
@@ -33,7 +32,6 @@ export const AuthProvider = ({ children }) => {
       });
 
       if (response.status === 201) {
-        // Assuming the API returns the user data upon successful signup
         // do nothing for now
         return true;
       } else {
@@ -60,9 +58,7 @@ export const AuthProvider = ({ children }) => {
         email,
         photo_url
       });
-
       if (response.status === 201) {
-        // Assuming the API returns the user data upon successful signup
         // do nothing for now
         return true;
       } else {
@@ -88,12 +84,10 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 200) {
         console.log("login successful");
         // Assuming the API returns user data upon successful login
-        // console.log(response.data.token);
         setUserType('student');
         setToken(response.data.token);
         setName(response.data.student.name);
         setUsername(response.data.student.username);
-        
         setEmail(response.data.student.email);
         setUserId(response.data.student.student_id);
         setPhotoUrl(response.data.student.photo_url);
@@ -101,7 +95,6 @@ export const AuthProvider = ({ children }) => {
         console.log("login name is " + name);
         console.log("login username is " + username);
         console.log("login email is " + email);
-        console.log("token is " + token);
         console.log("usertpye is " + userType);
       } else {
         throw new Error('Login failed');
@@ -124,13 +117,10 @@ export const AuthProvider = ({ children }) => {
         username,
         password
       });
-      console.log(response.data.student)
       if (response.status === 200) {
         setUserType('tutor');
         console.log("login successful");
 
-        // Assuming the API returns user data upon successful login
-        // console.log(response.data.token);  
         setToken(response.data.token);
         setSubjects(response.data.tutor.subjects);
         setName(response.data.tutor.name);
@@ -141,12 +131,10 @@ export const AuthProvider = ({ children }) => {
         setRatingCount(response.data.tutor.rating_count);
         setPhotoUrl(response.data.tutor.photo_url);
         
-
         console.log("usertpye is " + userType);
         console.log("login name is " + name);
         console.log("login username is " + username);
         console.log("login email is " + email);
-        console.log("token is " + token);
       } else {
         throw new Error('Login failed');
       }

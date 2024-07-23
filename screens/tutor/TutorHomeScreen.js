@@ -1,13 +1,11 @@
-import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
+import { View, TouchableOpacity, Image } from 'react-native'
 import { Button, Card, Text } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import React, { useLayoutEffect } from 'react'
+import React from 'react'
 import { useNavigation } from '@react-navigation/core';
 import useAuth from '../../hooks/useAuth';
-import { useState } from 'react';
 import tw from 'twrnc';
-import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons'
-import images from '../../assets/images';
+import { Ionicons } from '@expo/vector-icons'
 
 const TutorHomeScreen = () => {
   const navigation = useNavigation();

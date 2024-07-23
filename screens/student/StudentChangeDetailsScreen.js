@@ -1,24 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Alert } from 'react-native';
 import { Button } from 'react-native-paper'
 import useAuth from '../../hooks/useAuth';
 import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';
-import useUserProfile, { UserProfileProvider } from '../../hooks/userProfileProvider';
-import { useEffect } from 'react';
+import useUserProfile from '../../hooks/userProfileProvider';
 
 const StudentChangeDetailsScreen = () => {
     const { name, username, email } = useAuth();
     const { updateDetailsStudent } = useUserProfile();
     const navigation = useNavigation();
     const { logout } = useAuth();
-
     const [newName, setNewName] = useState('');
     const [newUsername, setNewUsername] = useState('');
     const [newEmail, setNewEmail] = useState('');
-
-
-    console.log("name is" + name);
 
     useEffect(() => {
         // Set the initial state when the component mounts

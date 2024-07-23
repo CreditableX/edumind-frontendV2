@@ -21,13 +21,13 @@ export const UserProfileProvider = ({ children }) => {
     setEmailState(email);
   }, []);
 
-    // Setting up Axios interceptor to include token in all requests
-    useEffect(() => {
+  // Setting up Axios interceptor to include token in all requests
+  useEffect(() => {
 
-      console.log("Token in ChatsProvider:", token);
-      const requestInterceptor = axios.interceptors.request.use(
-        (config) => {
-          if (token) {
+    console.log("Token in ChatsProvider:", token);
+    const requestInterceptor = axios.interceptors.request.use(
+      (config) => {
+        if (token) {
             config.headers['Authorization'] = `Bearer ${token}`;
           }
           return config;
@@ -42,6 +42,8 @@ export const UserProfileProvider = ({ children }) => {
       };
     }, [token]); // Re-run the effect if the token changes
 
+  
+  // student details updating
   const updateDetailsStudent = async (newUsername, newName, newEmail) => {
     setLoading(true);
     setError(null);
@@ -64,6 +66,7 @@ export const UserProfileProvider = ({ children }) => {
     }
   };
 
+  // tutor details updating
   const updateDetailsTutor = async (newUsername, newName, newEmail) => {
     setLoading(true);
     setError(null);

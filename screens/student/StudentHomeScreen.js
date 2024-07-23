@@ -1,13 +1,11 @@
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
 import { Button, Card, Text, Title } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import React, { useLayoutEffect, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigation } from '@react-navigation/core';
 import useAuth from '../../hooks/useAuth';
-import { useState } from 'react';
 import tw from 'twrnc';
-import { AntDesign, Entypo, Ionicons } from '@expo/vector-icons'
-import images from '../../assets/images';
+import { Ionicons } from '@expo/vector-icons'
 import useChats from '../../hooks/chatProvider';
 
 const StudentHomeScreen = () => {
