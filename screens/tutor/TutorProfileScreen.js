@@ -12,8 +12,6 @@ const TutorProfileScreen = () => {
     const { subjectList } = useChats();
     const navigation = useNavigation();
 
-    console.log(photoUrl);
-
     const subjectString = () => {
         if (subjects) {
             repStr = ''

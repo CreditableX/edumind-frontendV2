@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null); // Authentication token
 
   // student signup 
-  const studentSignup = async (username, password, name, email) => {
+  const studentSignup = async (username, password, name, email, photo_url) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
@@ -28,7 +28,8 @@ export const AuthProvider = ({ children }) => {
         username,
         password,
         name,
-        email
+        email,
+        photo_url
       });
 
       if (response.status === 201) {
