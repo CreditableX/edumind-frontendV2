@@ -84,14 +84,66 @@ export const UserProfileProvider = ({ children }) => {
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
-      console.error('Update username error:', err);
+      console.error('Update profile error:', err);
     } finally {
       setLoading(false);
     }
   };
 
+  // student password updating
+  const updatePasswordStudent = async (oldPassword, newPassword) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.put(`${HEROKU_PATH}/students/update-password`, {
+            old_password: oldPassword,
+            new_password: newPassword
+          });
+          if (response.status === 200) {
+            console.log('updated password');
+          } else {
+            throw new Error('Update failed');
+          }
+        } catch (err) {
+          setError(err.response?.data?.message || err.message);
+          console.error('Update password error:', err);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+    // tutor password updating
+    const updatePasswordTutor = async (oldPassword, newPassword) => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await axios.put(`${HEROKU_PATH}/tutors/update-password`, {
+          old_password: oldPassword,
+          new_password: newPassword
+        });
+        if (response.status === 200) {
+          console.log('updated password');
+        } else {
+          throw new Error('Update failed');
+        }
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+        console.error('Update password error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
   return (
-    <UserProfileContext.Provider value={{ usernameState, nameState, emailState, updateDetailsStudent, updateDetailsTutor}}>
+    <UserProfileContext.Provider value={{ 
+      usernameState, 
+      nameState, 
+      emailState, 
+      updateDetailsStudent, 
+      updateDetailsTutor,
+      updatePasswordStudent,
+      updatePasswordTutor
+      }}>
       {children}
     </UserProfileContext.Provider>
   );

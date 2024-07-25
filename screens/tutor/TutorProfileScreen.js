@@ -47,6 +47,13 @@ const TutorProfileScreen = () => {
                 Update Details
             </Button>
             <Button
+                onPress={() => navigation.navigate("TutorChangePassword")}
+                mode="contained"
+                style={tw`mb-2`}
+            >
+                Update Password
+            </Button>
+            <Button
                 onPress={() => navigation.navigate('TutorHome')}
                 mode="contained"
                 style={tw`mb-2`}

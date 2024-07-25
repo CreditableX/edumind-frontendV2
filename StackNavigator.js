@@ -10,6 +10,7 @@ import StartUpScreen from './screens/StartUpScreen';
 import StudentProfileScreen from './screens/student/StudentProfileScreen';
 import SingleChatScreen from './screens/SingleChatScreen';
 import StudentChangeDetailsScreen from './screens/student/StudentChangeDetailsScreen';
+import StudentChangePasswordScreen from './screens/student/StudentChangePasswordScreen';
 import TutorHomeScreen from './screens/tutor/TutorHomeScreen';
 import TutorProfileScreen from './screens/tutor/TutorProfileScreen';
 import TutorChangeDetailsScreen from './screens/tutor/TutorChangeDetailsScreen';
@@ -18,6 +19,7 @@ import TutorChatScreen from './screens/tutor/TutorChatScreen';
 import AcceptQuestionScreen from './screens/tutor/AcceptQuestionScreen';
 import StudentSignupScreen from './screens/student/StudentSignupScreen';
 import TutorSignupScreen from './screens/tutor/TutorSignupScreen';
+import TutorChangePasswordScreen from './screens/tutor/TutorChangePasswordScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +47,7 @@ const StackNavigator = () => {
             <Stack.Screen name="StudentProfile" component={StudentProfileScreen} />
             <Stack.Screen name="SingleChat" component={SingleChatScreen} />
             <Stack.Screen name="StudentChangeDetails" component={StudentChangeDetailsScreen} />
+            <Stack.Screen name="StudentChangePassword" component={StudentChangePasswordScreen} />
           </>
         ) : userType == 'tutor' ? (
           <>
@@ -54,6 +57,7 @@ const StackNavigator = () => {
             <Stack.Screen name="TutorProfile" component={TutorProfileScreen} />
             <Stack.Screen name="SingleChat" component={SingleChatScreen} />
             <Stack.Screen name="TutorChangeDetails" component={TutorChangeDetailsScreen} />
+            <Stack.Screen name="TutorChangePassword" component={TutorChangePasswordScreen} />
             <Stack.Screen name="AcceptQuestion" component={AcceptQuestionScreen} />
           </>
         ) : (
