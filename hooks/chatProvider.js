@@ -12,6 +12,8 @@ export const ChatsProvider = ({ children }) => {
   const [singleChatId, setSingleChatId] = useState(null);
   const [singleChatStudentId, setSingleChatStudentId] = useState(null);
   const [singleChatTutorId, setSingleChatTutorId] = useState(null);
+  const [singleChatStudentName, setSingleChatStudentName] = useState(null);
+  const [singleChatTutorName, setSingleChatTutorName] = useState(null);
   const [subjectList, setSubjectList] = useState(null);
   const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -127,7 +129,7 @@ export const ChatsProvider = ({ children }) => {
   };
 
   // calls every time a single chat is entered
-  const updateSingleChatId = (id) => {
+  const updateSingleChatId = async (id) => {
     setMessages(null);
     setSingleChatId(id);
 
@@ -136,6 +138,8 @@ export const ChatsProvider = ({ children }) => {
     setSingleChatStudentId(chat.student_id);
     setSingleChatTutorId(chat.tutor_id);
     setPhotoUrl(chat.photo_url);
+
+    await getSingleChatDetails(chat.student_id, chat.tutor_id);
 
     console.log("updated single chat id: " + id);
   }
@@ -206,6 +210,44 @@ export const ChatsProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
+  }
+
+  // get both tutor and student names and images
+  const getSingleChatDetails = async (student_id, tutor_id) => {
+    setLoading(true);
+    setError(null);
+    console.log("student + tutor " + student_id + " " + tutor_id);
+    try {
+      const response = await axios.get(`${HEROKU_PATH}/students/profile`, {
+        student_id
+      });
+      if (response.status === 200) {
+        console.log("student fetched " + response.data);
+      } else {
+        throw new Error('Failed to fetch student');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Student fetch error:', err);
+    } finally {
+      setLoading(false);
+    }
+
+    // try {
+    //   const response = await axios.get(`${HEROKU_PATH}/tutors/profile`, {
+    //     tutor_id: tutor
+    //   });
+    //   if (response.status === 200) {
+    //     console.log("tutor fetched " + response.data);
+    //   } else {
+    //     throw new Error('Failed to fetch tutor');
+    //   }
+    // } catch (err) {
+    //   setError(err.response?.data?.message || err.message);
+    //   console.error('Tutor fetch error:', err);
+    // } finally {
+    //   setLoading(false);
+    // }
   }
 
   return (

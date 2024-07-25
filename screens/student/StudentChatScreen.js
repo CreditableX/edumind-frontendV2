@@ -18,8 +18,8 @@ const StudentChatScreen = () => {
     getChats(); // Fetch chats when the component mounts
   }, []);
 
-  const moveToSingleChat = (id) => {
-    updateSingleChatId(id);
+  const moveToSingleChat = async (id) => {
+    await updateSingleChatId(id);
     navigation.navigate("SingleChat");
   }
 

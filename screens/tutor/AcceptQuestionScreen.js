@@ -1,5 +1,5 @@
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/core';
 import useChats from '../../hooks/chatProvider';
@@ -21,6 +21,8 @@ const AcceptQuestionScreen = () => {
       Alert.alert('Accept chat error', error.message); // Display error message if msg creation fails
     }
   };
+
+  useEffect 
 
   return (
     <SafeAreaView style={tw`flex-1`}>

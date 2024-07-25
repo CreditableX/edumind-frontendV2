@@ -18,8 +18,8 @@ const TutorChatScreen = () => {
     getChats(); // Fetch chats when the component mounts
   }, []);
 
-  const moveToSingleChat = (id) => {
-    updateSingleChatId(id);
+  const moveToSingleChat = async (id) => {
+    await updateSingleChatId(id);
     // await new Promise(resolve => setTimeout(resolve, 7000)); // 2 seconds delay
     navigation.navigate("SingleChat");
   }
