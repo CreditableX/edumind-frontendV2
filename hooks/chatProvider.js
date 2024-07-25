@@ -2,6 +2,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import useAuth from './useAuth';
+import { HEROKU_PATH } from '@env';
 
 const ChatsContext = createContext();
 
@@ -43,7 +44,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/chats');
+      const response = await axios.get(`${HEROKU_PATH}/chats`);
       if (response.status === 200) {
         setChats(response.data);
       } else {
@@ -62,7 +63,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get('https://edumind-3587039ec3f2.herokuapp.com/v1/chats/pending');
+      const response = await axios.get(`${HEROKU_PATH}/chats/pending`);
       if (response.status === 200) {
         setChats(response.data);
       } else {
@@ -81,7 +82,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/students/new-question', {
+      const response = await axios.post(`${HEROKU_PATH}/students/new-question`, {
         subject_id,
         header,
         photo_url,
@@ -110,7 +111,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`https://edumind-3587039ec3f2.herokuapp.com/v1/chats/${singleChatId}`);
+      const response = await axios.get(`${HEROKU_PATH}/chats/${singleChatId}`);
       if (response.status === 200) {
         console.log("ok got messages");
         setMessages(response.data)
@@ -147,7 +148,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`https://edumind-3587039ec3f2.herokuapp.com/v1/chats/${singleChatId}`, {
+      const response = await axios.post(`${HEROKU_PATH}/chats/${singleChatId}`, {
         content
       });
       if (response.status === 201) {
@@ -171,7 +172,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.post(`https://edumind-3587039ec3f2.herokuapp.com/v1/chats/${singleChatId}/accept`, {
+      const response = await axios.post(`${HEROKU_PATH}/chats/${singleChatId}/accept`, {
       });
       if (response.status === 200) {
         console.log("question accepted");
@@ -191,7 +192,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`https://edumind-3587039ec3f2.herokuapp.com/v1/subjects`, {
+      const response = await axios.get(`${HEROKU_PATH}/subjects`, {
       });
       if (response.status === 200) {
         console.log("subjects fetched " + response.data);

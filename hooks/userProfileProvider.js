@@ -2,6 +2,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import useAuth from './useAuth';
+import { HEROKU_PATH } from '@env';
 
 const UserProfileContext = createContext();
 
@@ -48,7 +49,7 @@ export const UserProfileProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.put('https://edumind-3587039ec3f2.herokuapp.com/v1/students/profile', {
+      const response = await axios.put(`${HEROKU_PATH}/students/profile`, {
         username: newUsername,
         name: newName,
         email: newEmail
@@ -71,7 +72,7 @@ export const UserProfileProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.put('https://edumind-3587039ec3f2.herokuapp.com/v1/tutors/profile', {
+      const response = await axios.put(`${HEROKU_PATH}/tutors/profile`, {
         username: newUsername,
         name: newName,
         email: newEmail

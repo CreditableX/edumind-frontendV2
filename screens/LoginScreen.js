@@ -59,6 +59,7 @@ const LoginScreen = () => {
           <Checkbox
             status={isTutor ? 'checked' : 'unchecked'}
             onPress={() => setIsTutor(!isTutor)}
+            color="blue"
           />
           <Text style={tw`ml-2 text-base`}>I am a tutor</Text>
         </View>

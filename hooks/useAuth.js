@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from 'react'
 import axios from 'axios';
+import { HEROKU_PATH } from '@env';
 
 const AuthContext = createContext({
 })
@@ -23,7 +24,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
-      const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/students/register', {
+      const response = await axios.post(`${HEROKU_PATH}/students/register`, {
         username,
         password,
         name,
@@ -50,7 +51,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
-      const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/tutors/register', {
+      const response = await axios.post(`${HEROKU_PATH}/tutors/register`, {
         username,
         password,
         name,
@@ -77,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
-      const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/students/login', {
+      const response = await axios.post(`${HEROKU_PATH}/students/login`, {
         username,
         password
       });
@@ -113,7 +114,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     setError(null); // Clear any previous errors
     try {
-      const response = await axios.post('https://edumind-3587039ec3f2.herokuapp.com/v1/tutors/login', {
+      const response = await axios.post(`${HEROKU_PATH}/tutors/login`, {
         username,
         password
       });

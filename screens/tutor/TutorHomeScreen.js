@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons'
 
 const TutorHomeScreen = () => {
   const navigation = useNavigation();
-  const { user, logout } = useAuth();
+  const { user, logout, photoUrl } = useAuth();
 
   const handleLogOut = async () => {
     try {
