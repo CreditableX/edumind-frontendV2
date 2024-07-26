@@ -35,11 +35,13 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 201) {
         // do nothing for now
         return true;
-      } else {
-        throw new Error('Signup failed');
       }
     } catch (err) {
-      setError(err.response?.data?.message || err.message);
+      if (err.response?.status === 409) {
+        setError("409 - Conflict: Username or email is taken");
+      } else {
+        setError(err.response?.data?.message || 'Signup failed');
+      }
       console.error('Signup error:', err);
     } finally {
       setLoading(false);
@@ -50,6 +52,7 @@ export const AuthProvider = ({ children }) => {
   const tutorSignup = async (username, password, name, subjects, email, photo_url) => {
     setLoading(true);
     setError(null); // Clear any previous errors
+
     try {
       const response = await axios.post(`${HEROKU_PATH}/tutors/register`, {
         username,
@@ -60,13 +63,17 @@ export const AuthProvider = ({ children }) => {
         photo_url
       });
       if (response.status === 201) {
-        // do nothing for now
+        // Registration successful
         return true;
-      } else {
-        throw new Error('Signup failed');
-      }
+      } 
     } catch (err) {
-      setError(err.response?.data?.message || err.message);
+      if (err.response?.status === 409) {
+        console.log("409 - Conflict: Username or email is taken");
+        setError('Username or email is taken');
+        return(error);
+      } else {
+        setError(err.response?.data?.message || 'Signup failed');
+      }
       console.error('Signup error:', err);
     } finally {
       setLoading(false);

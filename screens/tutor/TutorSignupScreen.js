@@ -18,11 +18,26 @@ const TutorSignupScreen = () => {
     const [subjects, setSubjects] = useState([]);
     const [photoUrl, setPhotoUrl] = useState('');
     const [image, setImage] = useState('');
-    const { tutorSignup } = useAuth();
+    const { tutorSignup, error } = useAuth();
     const navigation = useNavigation();
     const { subjectList } = useChats();
 
     const [checkboxes, setCheckboxes] = useState([]);
+
+    const checkValid = (username, name, subjects, email) => {
+        const moderateEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        console.log("subby" + subjects);
+        if (username.length < 3 || name.length < 3) {
+            return 'Username and name need to be at least 3 characters'
+        }
+        if (typeof subjects !== 'object' || Object.keys(subjects).length === 0) {
+            return 'Needs to have at least 1 subject';
+        }
+        if (!moderateEmailRegex.test(email)) {
+            return 'Invalid Email';
+        }
+        return '';
+    }
 
     useEffect(() => {
         if (subjectList) {
@@ -81,11 +96,19 @@ const TutorSignupScreen = () => {
                 return;
             }
         }
-        try {
+
+        const reply = checkValid(username, name, subjects, email);
+
+        if (reply != '') {
+            Alert.alert(reply);
+        } else {
             await tutorSignup(username, password, name, subjects , email, photoUrl);
+        }
+
+        if (error != '') {
+            Alert.alert('Signup Error', error);
+        } else {
             navigation.navigate('Login'); // go to login screen
-        } catch (error) {
-            Alert.alert('Signup Error', error.message); // Display error message if signup fails
         }
     };
 

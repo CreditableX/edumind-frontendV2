@@ -15,11 +15,22 @@ const StudentSignupScreen = () => {
     const [email, setEmail] = useState('');
     const [photoUrl, setPhotoUrl] = useState('');
     const [image, setImage] = useState('');
-    const { studentSignup } = useAuth();
+    const { studentSignup, error } = useAuth();
     const navigation = useNavigation();
 
+    const checkValid = (username, name, email) => {
+        const moderateEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (username.length < 3 || name.length < 3) {
+            return 'Username and name need to be at least 3 characters'
+        }
+        if (!moderateEmailRegex.test(email)) {
+            return 'Invalid Email';
+        }
+        return '';
+    }
+
     const handleSignup = async () => {
-        if (image != null) {
+        if (image != '') {
             try {
                 // console.log("image " + image)
                 const compressedImage = await compressImage(image);
@@ -37,11 +48,19 @@ const StudentSignupScreen = () => {
                 return;
             }
         }
-        try {
+
+        const reply = checkValid(username, name, email);
+
+        if (reply != '') {
+            Alert.alert(reply);
+        } else {
             await studentSignup(username, password, name, email, photoUrl);
+        }
+
+        if (error != '') {
+            Alert.alert('Signup Error', error);
+        } else {
             navigation.navigate('Login'); // go to login screen
-        } catch (error) {
-            Alert.alert('Signup Error', error.message); // Display error message if signup fails
         }
     };
 
