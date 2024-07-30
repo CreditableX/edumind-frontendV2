@@ -1,5 +1,5 @@
 import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import useAuth from '../../hooks/useAuth'
 import { SafeAreaView } from 'react-native-safe-area-context'

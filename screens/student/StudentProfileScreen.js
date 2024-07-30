@@ -15,7 +15,7 @@ const StudentProfileScreen = () => {
             <View style={tw`flex-row items-center mb-4`}>
                 <Image
                     style={tw`h-15 w-15 rounded-full mr-4`}
-                    source={{ uri: photoUrl ? photoUrl : "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" }} // change to user image when complete
+                    source={{ uri: photoUrl ? photoUrl : "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250" }}
                 />
                 <Text style={tw`text-3xl font-bold`}>{username ? `${username}` : 'Loading user information...'}</Text>
             </View>

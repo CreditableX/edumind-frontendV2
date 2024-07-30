@@ -9,7 +9,7 @@ import { Card, Button } from 'react-native-paper'
 import useAuth from '../hooks/useAuth';
 
 const SingleChatScreen = () => {
-  const { singleChatId, getMessages, newMessage, messages, photoUrl } = useChats();
+  const { singleChatId, getMessages, newMessage, messages, photoUrl, endChat, singleChatStudentName, singleChatTutorName, singleChatStudentPhoto, singleChatTutorPhoto } = useChats();
   const { userId, userType } = useAuth();
   const [newMessageContent, setNewMessageContent] = useState('');
   const navigation = useNavigation();
@@ -21,6 +21,24 @@ const SingleChatScreen = () => {
       await getMessages();
     } catch (error) {
       Alert.alert('message send error', error.message); // Display error message if msg creation fails
+    }
+  };
+
+  const handleEndChat = async () => {
+    try {
+      console.log('ending chat with singlechatid ' + singleChatId);
+      await endChat(singleChatId);
+      navigation.navigate('TutorHome'); // Go back to the browse questions screen
+    } catch (error) {
+      Alert.alert('End chat error', error.message); // Display error message if end chat fails
+    }
+  };
+
+  const getPhotoUrl = () => {
+    if (userType === 'student') {
+      return singleChatStudentPhoto != '' ? singleChatStudentPhoto : "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250";
+    } else if (userType === 'tutor') {
+      return singleChatTutorPhoto != '' ? singleChatTutorPhoto : "https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250";
     }
   };
 
@@ -51,7 +69,6 @@ const SingleChatScreen = () => {
     );
   };
 
-
   const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
   return (
     <SafeAreaView style={tw`flex-1`}>
@@ -62,24 +79,27 @@ const SingleChatScreen = () => {
           style={tw`rounded-l`} // Increase padding and use rounded corners
           contentStyle={tw`py-2 px-6`} // Adjust padding inside the button
         />
-        <Text>{userType === 'student' ? 'Tutor Name' : 'Student Name'}</Text>
-        <Text>{userType === 'student' ? 'Tutor Pic' : 'Student Pic'}</Text>
+        <Text style={tw`text-xl font-bold`}>{userType === 'student' ? singleChatTutorName : singleChatStudentName} </Text>
+        <Image
+          style={tw`h-15 w-15 rounded-full mr-4`}
+          source={{ uri: getPhotoUrl() }}
+        />
       </View>
 
       <View style={tw`flex-1 justify-center items-center`}>
-    {photoUrl ? (
-      <Image
-        source={{ uri: photoUrl }}
-        style={{
-          width: screenWidth * 2 / 3,  // Set width to 1/3 of screen width
-            height: screenWidth * 2 / 3, // Set height to 1/3 of screen width (keeping aspect ratio square)
-          resizeMode: 'contain'
-        }}
-      />
-    ) : (
-      <Text style={tw`text-center`}>No Picture Available</Text>
-    )}
-  </View>
+        {photoUrl ? (
+          <Image
+            source={{ uri: photoUrl }}
+            style={{
+              width: screenWidth * 2 / 3,  // Set width to 1/3 of screen width
+              height: screenWidth * 2 / 3, // Set height to 1/3 of screen width (keeping aspect ratio square)
+              resizeMode: 'contain'
+            }}
+          />
+        ) : (
+          <Text style={tw`text-center`}>No Picture Available</Text>
+        )}
+      </View>
 
       <View style={tw`flex-1`}>
         <FlatList
@@ -104,6 +124,13 @@ const SingleChatScreen = () => {
           Send
         </Button>
       </View>
+      {userType === 'tutor' && (
+        <View style={tw`p-4`}>
+          <Button mode="contained" onPress={handleEndChat}>
+            End Chat
+          </Button>
+        </View>
+      )}
     </SafeAreaView>
   );
 };
