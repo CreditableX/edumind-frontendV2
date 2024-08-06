@@ -7,14 +7,14 @@ import { HEROKU_PATH } from '@env';
 const UserProfileContext = createContext();
 
 export const UserProfileProvider = ({ children }) => {
-  
+
   const { username, name, token, email } = useAuth();
 
   const [usernameState, setUsernameState] = useState(username);
   const [nameState, setNameState] = useState(name);
   const [emailState, setEmailState] = useState(email);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     setUsernameState(username);
@@ -29,21 +29,21 @@ export const UserProfileProvider = ({ children }) => {
     const requestInterceptor = axios.interceptors.request.use(
       (config) => {
         if (token) {
-            config.headers['Authorization'] = `Bearer ${token}`;
-          }
-          return config;
-        },
-        (error) => {
-          return Promise.reject(error);
+          config.headers['Authorization'] = `Bearer ${token}`;
         }
-      );
-      // Eject interceptor on cleanup
-      return () => {
-        axios.interceptors.request.eject(requestInterceptor);
-      };
-    }, [token]); // Re-run the effect if the token changes
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+    // Eject interceptor on cleanup
+    return () => {
+      axios.interceptors.request.eject(requestInterceptor);
+    };
+  }, [token]); // Re-run the effect if the token changes
 
-  
+
   // student details updating
   const updateDetailsStudent = async (newUsername, newName, newEmail) => {
     setLoading(true);
@@ -56,12 +56,18 @@ export const UserProfileProvider = ({ children }) => {
       });
       if (response.status === 200) {
         console.log('updated profile');
-      } else {
-        throw new Error('Update failed');
       }
     } catch (err) {
+      if (err.response?.status === 401) {
+        console.log("401 - Authentication required.");
+        setError('Authentication required.');
+        return (error);
+      } else if (err.response?.status === 409) {
+        console.log("409 - Conflict: Username or email is taken");
+        setError('Username or email is taken');
+      }
       setError(err.response?.data?.message || err.message);
-      console.error('Update username error:', err);
+      console.error('Update profile error:', err);
     } finally {
       setLoading(false);
     }
@@ -77,12 +83,19 @@ export const UserProfileProvider = ({ children }) => {
         name: newName,
         email: newEmail
       });
+
       if (response.status === 200) {
         console.log('updated profile');
-      } else {
-        throw new Error('Update failed');
       }
     } catch (err) {
+      if (err.response?.status === 401) {
+        console.log("401 - Authentication required.");
+        setError('Authentication required.');
+        return (error);
+      } else if (err.response?.status === 409) {
+        console.log("409 - Conflict: Username or email is taken");
+        setError('Username or email is taken');
+      }
       setError(err.response?.data?.message || err.message);
       console.error('Update profile error:', err);
     } finally {
@@ -96,59 +109,59 @@ export const UserProfileProvider = ({ children }) => {
     setError(null);
     try {
       const response = await axios.put(`${HEROKU_PATH}/students/update-password`, {
-            old_password: oldPassword,
-            new_password: newPassword
-          });
-          if (response.status === 200) {
-            console.log('updated password');
-          } else {
-            throw new Error('Update failed');
-          }
-        } catch (err) {
-          setError(err.response?.data?.message || err.message);
-          console.error('Update password error:', err);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-    // tutor password updating
-    const updatePasswordTutor = async (oldPassword, newPassword) => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await axios.put(`${HEROKU_PATH}/tutors/update-password`, {
-          old_password: oldPassword,
-          new_password: newPassword
-        });
-        if (response.status === 200) {
-          console.log('updated password');
-        } else {
-          throw new Error('Update failed');
-        }
-      } catch (err) {
-        setError(err.response?.data?.message || err.message);
-        console.error('Update password error:', err);
-      } finally {
-        setLoading(false);
+        old_password: oldPassword,
+        new_password: newPassword
+      });
+      if (response.status === 200) {
+        console.log('updated password');
+      } else {
+        throw new Error('Update failed');
       }
-    };
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Update password error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // tutor password updating
+  const updatePasswordTutor = async (oldPassword, newPassword) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.put(`${HEROKU_PATH}/tutors/update-password`, {
+        old_password: oldPassword,
+        new_password: newPassword
+      });
+      if (response.status === 200) {
+        console.log('updated password');
+      } else {
+        throw new Error('Update failed');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Update password error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <UserProfileContext.Provider value={{ 
-      usernameState, 
-      nameState, 
-      emailState, 
-      updateDetailsStudent, 
+    <UserProfileContext.Provider value={{
+      usernameState,
+      nameState,
+      emailState,
+      updateDetailsStudent,
       updateDetailsTutor,
       updatePasswordStudent,
       updatePasswordTutor
-      }}>
+    }}>
       {children}
     </UserProfileContext.Provider>
   );
 };
 
 export default function useUserProfile() {
-    return useContext(UserProfileContext);
-  }
+  return useContext(UserProfileContext);
+}

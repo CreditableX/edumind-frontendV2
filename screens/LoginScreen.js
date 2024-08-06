@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, Alert } from 'react-native';
 import { Checkbox } from 'react-native-paper';
 import useAuth from '../hooks/useAuth';
 import tw from 'twrnc';
@@ -25,12 +25,19 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     try {
       if (isTutor) {
-        await tutorLogin(username, password);
+        const success = await tutorLogin(username, password);
+        if (!success) {
+          Alert.alert("Failed to login. Check username and password and tutor checkbox");
+        }
       } else {
-        await studentLogin(username, password); // Student login
+        const success = await studentLogin(username, password); // Student login
+        if (!success) {
+          Alert.alert("Failed to login. Check username and password and tutor checkbox");
+        }
       }
     } catch (error) {
-      console.error('Login error:', error); // Handle login error
+      Alert.alert(error);
+      console.error('Login error:', error); 
     }
   };
 

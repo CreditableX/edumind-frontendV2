@@ -8,7 +8,7 @@ import useUserProfile from '../../hooks/userProfileProvider';
 
 const TutorChangeDetailsScreen = () => {
     const { name, username, email, logout } = useAuth();
-    const { updateDetailsTutor } = useUserProfile();
+    const { updateDetailsTutor, error } = useUserProfile();
     const navigation = useNavigation();
 
     // Initialize state with default values
@@ -23,14 +23,33 @@ const TutorChangeDetailsScreen = () => {
         setNewEmail(email);
     }, [name, username, email]); // Run effect when any of these values change
 
-    const handleUpdateDetails = async () => {
-        try {
-            await updateDetailsTutor(newName, newUsername, newEmail);
-            Alert.alert('Profile updated successfully. Please relogin');
-            logout(); // Logout user if successful
-        } catch (error) {
-            Alert.alert('Name update error', error.message); // Display error message if update fails
+    const checkValid = (username, name, email) => {
+        const moderateEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (username.length < 3 || name.length < 3) {
+            return 'Username and name need to be at least 3 characters'
         }
+        if (!moderateEmailRegex.test(email)) {
+            return 'Invalid Email';
+        }
+        return '';
+    }
+
+    const handleUpdateDetails = async () => {
+        const reply = checkValid(newName, newUsername, newEmail);
+        if (reply != '') {
+            Alert.alert(reply);
+        } else {
+            await updateDetailsTutor(newName, newUsername, newEmail);
+            logout();
+        }
+
+        if (error != null) {
+            Alert.alert('Change Details Error', error);
+        } else {
+            Alert.alert('Change Details Success, please login again');
+            logout(); // go to login screen
+        }
+
     };
 
     return (

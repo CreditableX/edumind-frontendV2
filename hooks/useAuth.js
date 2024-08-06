@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [userType, setUserType] = useState(null);
   const [rating, setRating] = useState(0);
   const [ratingCount, setRatingCount] = useState(0);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
   const [subjects, setSubjects] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(null);
   const [token, setToken] = useState(null); // Authentication token
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
       });
 
       if (response.status === 201) {
-        // do nothing for now
+        // do nothing for nowr
         return true;
       }
     } catch (err) {
@@ -65,12 +65,12 @@ export const AuthProvider = ({ children }) => {
       if (response.status === 201) {
         // Registration successful
         return true;
-      } 
+      }
     } catch (err) {
       if (err.response?.status === 409) {
         console.log("409 - Conflict: Username or email is taken");
         setError('Username or email is taken');
-        return(error);
+        return (error);
       } else {
         setError(err.response?.data?.message || 'Signup failed');
       }
@@ -104,11 +104,9 @@ export const AuthProvider = ({ children }) => {
         console.log("login username is " + username);
         console.log("login email is " + email);
         console.log("usertpye is " + userType);
-      } else {
-        throw new Error('Login failed');
+        return true;
       }
     } catch (err) {
-
       setError(err.response?.data?.message || err.message);
       console.error('Login error:', err);
     } finally {
@@ -138,13 +136,12 @@ export const AuthProvider = ({ children }) => {
         setRating(response.data.tutor.rating);
         setRatingCount(response.data.tutor.rating_count);
         setPhotoUrl(response.data.tutor.photo_url);
-        
+
         console.log("usertpye is " + userType);
         console.log("login name is " + name);
         console.log("login username is " + username);
         console.log("login email is " + email);
-      } else {
-        throw new Error('Login failed');
+        return true;
       }
     } catch (err) {
 

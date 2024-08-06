@@ -26,7 +26,6 @@ const TutorSignupScreen = () => {
 
     const checkValid = (username, name, subjects, email) => {
         const moderateEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        console.log("subby" + subjects);
         if (username.length < 3 || name.length < 3) {
             return 'Username and name need to be at least 3 characters'
         }
@@ -78,7 +77,7 @@ const TutorSignupScreen = () => {
     };
 
     const handleSignup = async () => {
-        if (image != null) {
+        if (image != '') {
             try {
                 // console.log("image " + image)
                 const compressedImage = await compressImage(image);

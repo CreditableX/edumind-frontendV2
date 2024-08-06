@@ -60,6 +60,7 @@ const StudentSignupScreen = () => {
         if (error != '') {
             Alert.alert('Signup Error', error);
         } else {
+            Alert.alert('Signup successful');
             navigation.navigate('Login'); // go to login screen
         }
     };
