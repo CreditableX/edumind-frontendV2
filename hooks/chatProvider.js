@@ -17,6 +17,7 @@ export const ChatsProvider = ({ children }) => {
   const [singleChatStudentPhoto, setSingleChatStudentPhoto] = useState('');
   const [singleChatTutorPhoto, setSingleChatTutorPhoto] = useState('');
   const [subjectList, setSubjectList] = useState(null);
+  const [singleChatTopicList, setSingleChatTopicList] = useState(null);
   const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(false);
   const [photoUrl, setPhotoUrl] = useState(null);
@@ -142,10 +143,31 @@ export const ChatsProvider = ({ children }) => {
     setSingleChatStudentId(chat.student_id);
     setSingleChatTutorId(chat.tutor_id);
     setPhotoUrl(chat.photo_url);
+    updateTopicList(chat.subject_id);
 
     await getSingleChatDetails(chat.student_id, chat.tutor_id);
 
     console.log("updated single chat id: " + id);
+  }
+
+  const updateTopicList = async (id) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(`${HEROKU_PATH}/${id}/topics`);
+      if (response.status === 200) {
+        console.log("ok got topics");
+        console.log(response.data);
+        setSingleChatTopicList(response.data)
+      } else {
+        throw new Error('Failed to fetch topics');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Get topics error:', err);
+    } finally {
+      setLoading(false);
+    }
   }
 
   // send a new message into a chat
