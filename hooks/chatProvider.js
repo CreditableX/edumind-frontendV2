@@ -154,7 +154,7 @@ export const ChatsProvider = ({ children }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`${HEROKU_PATH}/${id}/topics`);
+      const response = await axios.get(`${HEROKU_PATH}/subjects/${id}/topics`);
       if (response.status === 200) {
         console.log("ok got topics");
         console.log(response.data);
