@@ -86,6 +86,20 @@ const StudentHomeScreen = () => {
         </Card.Content>
       </Card>
 
+      <Card style={tw`m-4 p-4 rounded-xl`}>
+        <Card.Content style={tw`items-center`}>
+          <Button
+            mode="contained"
+            onPress={() => navigation.navigate("RateTutor")}
+            style={tw`my-4 rounded-lg w-36 h-12 justify-center`}
+            labelStyle={tw`text-white text-lg`}
+          >
+            Rate Tutors
+          </Button>
+          <Text style={tw`mt-1 text-base`}>Rate your completed chats!</Text>
+        </Card.Content>
+      </Card>
+
       <Text style={tw`text-xl font-bold text-center`}>Recent chats</Text>
 
       <Card style={tw`m-4 p-4 rounded-xl`}>

@@ -116,6 +116,7 @@ export const AuthProvider = ({ children }) => {
 
   // tutor login 
   const tutorLogin = async (username, password) => {
+    console.log(HEROKU_PATH);
     setLoading(true);
     setError(null); // Clear any previous errors
     try {

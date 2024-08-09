@@ -157,7 +157,7 @@ export const ChatsProvider = ({ children }) => {
       const response = await axios.get(`${HEROKU_PATH}/subjects/${id}/topics`);
       if (response.status === 200) {
         console.log("ok got topics");
-        console.log(response.data);
+        // console.log(response.data);
         setSingleChatTopicList(response.data)
       } else {
         throw new Error('Failed to fetch topics');
@@ -195,7 +195,7 @@ export const ChatsProvider = ({ children }) => {
   }
 
   // tutor accepting a chat
-  const tutorAccept = async () => {
+  const tutorAccept = async (topic) => {
     // some error handling
     if (!singleChatId) return;
 
@@ -206,12 +206,22 @@ export const ChatsProvider = ({ children }) => {
       });
       if (response.status === 200) {
         console.log("question accepted");
-      } else {
-        throw new Error('Failed to accept question');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
       console.error('Question accept error:', err);
+    }
+
+    try {
+      const response = await axios.put(`${HEROKU_PATH}/chats/${singleChatId}/update-topics`, {
+        topic
+      });
+      if (response.status === 200) {
+        console.log("topic success");
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Topic set error:', err);
     } finally {
       setLoading(false);
     }
@@ -219,6 +229,7 @@ export const ChatsProvider = ({ children }) => {
 
   // list of subjects, updated when the app launches
   const updateSubjects = async () => {
+    console.log(HEROKU_PATH);
     setLoading(true);
     setError(null);
     try {
@@ -227,8 +238,6 @@ export const ChatsProvider = ({ children }) => {
       if (response.status === 200) {
         console.log("subjects fetched " + response.data);
         setSubjectList(response.data);
-      } else {
-        throw new Error('Failed to fetch subjects');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -250,8 +259,6 @@ export const ChatsProvider = ({ children }) => {
         console.log("student fetched " + response.data.username);
         setSingleChatStudentName(response.data.username);
         setSingleChatStudentPhoto(response.data.photo_url);
-      } else {
-        throw new Error('Failed to fetch student');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -266,8 +273,6 @@ export const ChatsProvider = ({ children }) => {
         console.log("tutor fetched " + response.data);
         setSingleChatTutorName(response.data.username);
         setSingleChatTutorPhoto(response.data.photo_url);
-      } else {
-        throw new Error('Failed to fetch tutor');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -285,12 +290,45 @@ export const ChatsProvider = ({ children }) => {
       });
       if (response.status === 200) {
         console.log(response.data);
-      } else {
-        throw new Error('Failed to end chat');
-      }
+      } 
     } catch (err) {
       setError(err.response?.data?.message || err.message);
       console.error('End chat error:', err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  const getChatsToRate = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.get(`${HEROKU_PATH}/chats`);
+      if (response.status === 200) {
+        const filteredChats = response.data.filter(chat => chat.completed && chat.rating == null);
+        setChats(filteredChats);
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Filtered chats error:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const giveRating = async (rating) => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await axios.post(`${HEROKU_PATH}/chats/${singleChatId}/rate`, {
+        rating
+      });
+      if (response.status === 200) {
+        console.log("rating success");
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+      console.error('Chat rating error:', err);
     } finally {
       setLoading(false);
     }
@@ -309,6 +347,7 @@ export const ChatsProvider = ({ children }) => {
       singleChatTutorName,
       singleChatStudentPhoto,
       singleChatTutorPhoto,
+      singleChatTopicList,
       setSingleChatId, 
       getChats, 
       newChat, 
@@ -319,6 +358,8 @@ export const ChatsProvider = ({ children }) => {
       tutorAccept,
       updateSubjects,
       endChat,
+      getChatsToRate,
+      giveRating,
       loading, 
       error }}>
       {children}

@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image, TextInput, Dimensions } from 'react-native'
+import { View, Text, FlatList, Image, TextInput, Dimensions, Alert } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/core';
@@ -12,6 +12,7 @@ const SingleChatScreen = () => {
   const { singleChatId, getMessages, newMessage, messages, photoUrl, endChat, singleChatStudentName, singleChatTutorName, singleChatStudentPhoto, singleChatTutorPhoto } = useChats();
   const { userId, userType } = useAuth();
   const [newMessageContent, setNewMessageContent] = useState('');
+  const [rating, setRating] = useState(0);
   const navigation = useNavigation();
 
   const handleNewMessage = async () => {
@@ -33,6 +34,19 @@ const SingleChatScreen = () => {
       Alert.alert('End chat error', error.message); // Display error message if end chat fails
     }
   };
+
+  const handleRating = async () => {
+    try {
+      setRating(5);
+      if (1 <= rating && 5 >= rating) {
+        await giveRating(rating);
+        Alert.alert("Rating success");
+        navigation.navigate('StudentHome'); // Go back to the browse questions screen
+      }
+    } catch (error) {
+      Alert.alert('Rating error', error.message); // Display error message if end chat fails
+    }
+  }
 
   const getPhotoUrl = () => {
     if (userType === 'student') {
@@ -128,6 +142,13 @@ const SingleChatScreen = () => {
         <View style={tw`p-4`}>
           <Button mode="contained" onPress={handleEndChat}>
             End Chat
+          </Button>
+        </View>
+      )}
+      {userType === 'student' && (
+        <View style={tw`p-4`}>
+          <Button mode="contained" onPress={handleRating}>
+            Rate chat!
           </Button>
         </View>
       )}

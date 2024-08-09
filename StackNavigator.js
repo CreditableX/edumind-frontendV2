@@ -20,6 +20,7 @@ import AcceptQuestionScreen from './screens/tutor/AcceptQuestionScreen';
 import StudentSignupScreen from './screens/student/StudentSignupScreen';
 import TutorSignupScreen from './screens/tutor/TutorSignupScreen';
 import TutorChangePasswordScreen from './screens/tutor/TutorChangePasswordScreen';
+import RateTutorScreen from './screens/student/RateTutorScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -48,6 +49,7 @@ const StackNavigator = () => {
             <Stack.Screen name="SingleChat" component={SingleChatScreen} />
             <Stack.Screen name="StudentChangeDetails" component={StudentChangeDetailsScreen} />
             <Stack.Screen name="StudentChangePassword" component={StudentChangePasswordScreen} />
+            <Stack.Screen name="RateTutor" component={RateTutorScreen} />
           </>
         ) : userType == 'tutor' ? (
           <>

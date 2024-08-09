@@ -1,20 +1,22 @@
 import { View, Text } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/core';
 import useChats from '../../hooks/chatProvider';
 import tw from 'twrnc';
 import { Button } from 'react-native-paper'
 import useAuth from '../../hooks/useAuth';
+import RNPickerSelect from 'react-native-picker-select';
 
 const AcceptQuestionScreen = () => {
-  const { singleChatId, getMessages, newMessage, messages, tutorAccept, tutorGetChats } = useChats();
+  const { singleChatId, getMessages, newMessage, messages, tutorAccept, tutorGetChats, singleChatTopicList } = useChats();
   const { userId, userType } = useAuth();
+  const [selectedTopic, setSelectedTopic] = useState('');
   const navigation = useNavigation();
   
   const handleAcceptChat = async () => {
     try {
-      await tutorAccept(singleChatId);
+      await tutorAccept(selectedTopic);
       await tutorGetChats();
       navigation.navigate("BrowseQuestions");
     } catch (error) {
@@ -22,7 +24,7 @@ const AcceptQuestionScreen = () => {
     }
   };
 
-  useEffect 
+
 
   return (
     <SafeAreaView style={tw`flex-1`}>
@@ -37,6 +39,21 @@ const AcceptQuestionScreen = () => {
           <Text>Tutor picture</Text>
       </View>
 
+      <View style={tw`p-4`}>
+        <Text>Select a Topic:</Text>
+        <RNPickerSelect
+          onValueChange={(value) => setSelectedTopic(value)}
+          items={singleChatTopicList.map((topic) => ({
+            label: topic.name, // Assuming `topic.name` contains the name of the topic
+            value: topic.topic_id, // Assuming `topic.id` contains the unique identifier for the topic
+          }))}
+          placeholder={{ label: "Select a topic", value: null }}
+          style={{
+            inputIOS: tw`border p-2 rounded`, // Styling for iOS
+            inputAndroid: tw`border p-2 rounded`, // Styling for Android
+          }}
+        />
+      </View>
 
       <View style={tw`flex-row items-center p-4`}>
         <Button mode="contained" onPress={handleAcceptChat}>
