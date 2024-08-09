@@ -195,7 +195,7 @@ export const ChatsProvider = ({ children }) => {
   }
 
   // tutor accepting a chat
-  const tutorAccept = async (topic) => {
+  const tutorAccept = async (topics) => {
     // some error handling
     if (!singleChatId) return;
 
@@ -212,9 +212,10 @@ export const ChatsProvider = ({ children }) => {
       console.error('Question accept error:', err);
     }
 
+    const topicArray = [topics];
     try {
       const response = await axios.put(`${HEROKU_PATH}/chats/${singleChatId}/update-topics`, {
-        topic
+        topics: topicArray
       });
       if (response.status === 200) {
         console.log("topic success");
