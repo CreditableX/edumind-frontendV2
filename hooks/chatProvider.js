@@ -17,7 +17,7 @@ export const ChatsProvider = ({ children }) => {
   const [singleChatStudentPhoto, setSingleChatStudentPhoto] = useState('');
   const [singleChatTutorPhoto, setSingleChatTutorPhoto] = useState('');
   const [subjectList, setSubjectList] = useState(null);
-  const [singleChatTopicList, setSingleChatTopicList] = useState(null);
+  const [singleChatTopicList, setSingleChatTopicList] = useState([]);
   const [messages, setMessages] = useState(null);
   const [loading, setLoading] = useState(false);
   const [photoUrl, setPhotoUrl] = useState(null);
@@ -212,10 +212,13 @@ export const ChatsProvider = ({ children }) => {
       console.error('Question accept error:', err);
     }
 
+    console.log([parseInt(topics, 10)]);
     const topicArray = [topics];
+
     try {
+      console.log("topicarray " + topicArray);
       const response = await axios.put(`${HEROKU_PATH}/chats/${singleChatId}/update-topics`, {
-        topics: topicArray
+        topics: [parseInt(topics, 10)]
       });
       if (response.status === 200) {
         console.log("topic success");
@@ -268,18 +271,20 @@ export const ChatsProvider = ({ children }) => {
       setLoading(false);
     }
 
-    try {
-      const response = await axios.get(`${HEROKU_PATH}/tutors/profile/${singleChatTutorId}`);
-      if (response.status === 200) {
-        console.log("tutor fetched " + response.data);
-        setSingleChatTutorName(response.data.username);
-        setSingleChatTutorPhoto(response.data.photo_url);
+    if (singleChatTutorId) {
+      try {
+        const response = await axios.get(`${HEROKU_PATH}/tutors/profile/${singleChatTutorId}`);
+        if (response.status === 200) {
+          console.log("tutor fetched " + response.data);
+          setSingleChatTutorName(response.data.username);
+          setSingleChatTutorPhoto(response.data.photo_url);
+        }
+      } catch (err) {
+        setError(err.response?.data?.message || err.message);
+        console.error('Tutor fetch error:', err);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError(err.response?.data?.message || err.message);
-      console.error('Tutor fetch error:', err);
-    } finally {
-      setLoading(false);
     }
   }
 
