@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Alert, ScrollView, Image, TextInput } from 'react-native';
-import { Button } from 'react-native-paper';
-import useAuth from '../../hooks/useAuth';
-import tw from 'twrnc'
-import CheckBox from 'expo-checkbox';
 import { useNavigation } from '@react-navigation/core';
-import useChats from '../../hooks/chatProvider';
+import CheckBox from 'expo-checkbox';
 import * as ImagePicker from "expo-image-picker";
-import { compressImage } from '../../util/ImageProcessing';
+import React, { useEffect, useState } from 'react';
+import { Alert, Image, ScrollView, Text, TextInput, View } from 'react-native';
+import { Button } from 'react-native-paper';
+import tw from 'twrnc';
 import { uploadToCloudinary } from '../../config/cloudinaryConfig';
+import useChats from '../../hooks/chatProvider';
+import useAuth from '../../hooks/useAuth';
+import { compressImage } from '../../util/ImageProcessing';
 
 const TutorSignupScreen = () => {
     const [username, setUsername] = useState('');
@@ -38,6 +38,7 @@ const TutorSignupScreen = () => {
         return '';
     }
 
+    // update subject list when it changes
     useEffect(() => {
         if (subjectList) {
             const initialCheckboxes = subjectList.map(subject => ({
@@ -55,12 +56,9 @@ const TutorSignupScreen = () => {
         const updatedSubjects = checkboxes
             .filter(item => item.checked)
             .reduce((acc, item) => {
-                acc[item.id] = item.yearsOfExperience; // assuming yearsOfExperience is an integer
+                acc[item.id] = item.yearsOfExperience;
                 return acc;
             }, {});
-    
-        console.log(JSON.stringify(updatedSubjects, null, 2)); // Pretty-printing the JSON
-    
         setSubjects(updatedSubjects);
     }, [checkboxes]);
 
@@ -79,7 +77,6 @@ const TutorSignupScreen = () => {
     const handleSignup = async () => {
         if (image != '') {
             try {
-                // console.log("image " + image)
                 const compressedImage = await compressImage(image);
                 try {
                     const response = await uploadToCloudinary(compressedImage, "default");
@@ -111,6 +108,7 @@ const TutorSignupScreen = () => {
         }
     };
 
+    // choose image from gallery
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -132,8 +130,8 @@ const TutorSignupScreen = () => {
                 <Button
                     icon="arrow-left"
                     onPress={() => navigation.navigate('Login')}
-                    style={tw`rounded-l`} // Increase padding and use rounded corners
-                    contentStyle={tw`py-2 px-6`} // Adjust padding inside the button
+                    style={tw`rounded-l`}
+                    contentStyle={tw`py-2 px-6`}
                 />
                 </View>
                 <Text style={tw`text-2xl mb-4`}>Sign up</Text>

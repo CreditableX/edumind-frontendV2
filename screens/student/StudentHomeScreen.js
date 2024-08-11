@@ -1,16 +1,16 @@
-import { StyleSheet, View, TouchableOpacity, Image } from 'react-native'
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/core';
+import React, { useEffect } from 'react';
+import { Alert, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Button, Card, Text, Title } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import React, { useEffect } from 'react'
-import { useNavigation } from '@react-navigation/core';
-import useAuth from '../../hooks/useAuth';
 import tw from 'twrnc';
-import { Ionicons } from '@expo/vector-icons'
 import useChats from '../../hooks/chatProvider';
+import useAuth from '../../hooks/useAuth';
 
 const StudentHomeScreen = () => {
   const navigation = useNavigation();
-  const { user, logout, photoUrl } = useAuth();
+  const { logout, photoUrl } = useAuth();
   const { getChats, chats, updateSingleChatId } = useChats();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const StudentHomeScreen = () => {
     try {
       await logout();
     } catch (error) {
-      Alert.alert('Logout Error', error.message); // Display error message if signup fails
+      Alert.alert('Logout Error', error.message); 
     }
   }
 
@@ -30,8 +30,10 @@ const StudentHomeScreen = () => {
     navigation.navigate("SingleChat");
   }
 
+  // choose up to 2 most recent chats to display
   const selectedChats = chats ? chats.slice(0, 2) : [];
 
+  // chat card
   const ChatItem = ({ chat }) => {
     return (
       <TouchableOpacity onPress={() => moveToSingleChat(chat.chat_id)} style={tw`p-4 border-b border-gray-400`}>
@@ -122,5 +124,3 @@ const StudentHomeScreen = () => {
 }
 
 export default StudentHomeScreen
-
-const styles = StyleSheet.create({})

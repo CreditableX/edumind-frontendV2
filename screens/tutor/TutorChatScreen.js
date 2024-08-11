@@ -1,11 +1,11 @@
-import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
-import React, { useEffect, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import useAuth from '../../hooks/useAuth'
+import React, { useEffect, useState } from 'react'
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
+import { Button, Card, Title } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tw from 'twrnc'
 import useChats from '../../hooks/chatProvider'
-import { Card, Title, Button } from 'react-native-paper'
+import useAuth from '../../hooks/useAuth'
 
 
 const TutorChatScreen = () => {
@@ -20,10 +20,10 @@ const TutorChatScreen = () => {
 
   const moveToSingleChat = async (id) => {
     await updateSingleChatId(id);
-    // await new Promise(resolve => setTimeout(resolve, 7000)); // 2 seconds delay
     navigation.navigate("SingleChat");
   }
 
+  // chat card
   const ChatItem = ({ chat }) => {
     return (
       <TouchableOpacity onPress={() => moveToSingleChat(chat.chat_id)} style={tw`p-4 border-b border-gray-400`}>

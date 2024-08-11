@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
-import { Checkbox } from 'react-native-paper';
-import useAuth from '../hooks/useAuth';
-import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/core';
+import React, { useEffect, useState } from 'react';
+import { Alert, Button, Text, TextInput, View } from 'react-native';
+import { Checkbox } from 'react-native-paper';
+import tw from 'twrnc';
+import useAuth from '../hooks/useAuth';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
@@ -30,7 +30,7 @@ const LoginScreen = () => {
           Alert.alert("Failed to login. Check username and password and tutor checkbox");
         }
       } else {
-        const success = await studentLogin(username, password); // Student login
+        const success = await studentLogin(username, password);
         if (!success) {
           Alert.alert("Failed to login. Check username and password and tutor checkbox");
         }

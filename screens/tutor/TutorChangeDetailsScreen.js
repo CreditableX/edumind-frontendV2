@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Alert } from 'react-native';
-import { Button } from 'react-native-paper';
-import useAuth from '../../hooks/useAuth';
-import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/core';
+import React, { useEffect, useState } from 'react';
+import { Alert, Text, TextInput, View } from 'react-native';
+import { Button } from 'react-native-paper';
+import tw from 'twrnc';
+import useAuth from '../../hooks/useAuth';
 import useUserProfile from '../../hooks/userProfileProvider';
 
 const TutorChangeDetailsScreen = () => {

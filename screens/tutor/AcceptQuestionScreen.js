@@ -1,17 +1,17 @@
-import { View, Text, FlatList, Image, TextInput, Dimensions, Alert } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/core';
-import useChats from '../../hooks/chatProvider';
-import tw from 'twrnc';
-import { Button } from 'react-native-paper'
-import useAuth from '../../hooks/useAuth';
+import React, { useEffect, useState } from 'react';
+import { Alert, Dimensions, FlatList, Image, Text, TextInput, View } from 'react-native';
+import { Button } from 'react-native-paper';
 import RNPickerSelect from 'react-native-picker-select';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import tw from 'twrnc';
+import useChats from '../../hooks/chatProvider';
+import useAuth from '../../hooks/useAuth';
 
 const AcceptQuestionScreen = () => {
-  const { singleChatId, getMessages, newMessage, messages, tutorAccept, tutorGetChats, singleChatTopicList,
+  const { singleChatId, getMessages, messages, tutorAccept, tutorGetChats, singleChatTopicList,
     singleChatStudentName, singleChatStudentPhoto, photoUrl} = useChats();
-  const { userId, userType } = useAuth();
+  const { userId } = useAuth();
   const [selectedTopic, setSelectedTopic] = useState('');
   const navigation = useNavigation();
   
@@ -43,7 +43,7 @@ const AcceptQuestionScreen = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        await getMessages(); // assuming getMessages is an async function
+        await getMessages();
       } catch (error) {
         console.error('Error fetching messages:', error);
       }

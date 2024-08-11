@@ -1,11 +1,11 @@
-import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
-import React, { useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import React, { useEffect } from 'react'
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
+import { Button, Card, Title } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tw from 'twrnc'
 import useChats from '../../hooks/chatProvider'
 import useAuth from '../../hooks/useAuth'
-import { Card, StyleSheet, Title, Button } from 'react-native-paper'
 
 
 const StudentChatScreen = () => {
@@ -23,6 +23,7 @@ const StudentChatScreen = () => {
     navigation.navigate("SingleChat");
   }
 
+  // chat card
   const ChatItem = ({ chat }) => {
     return (
       <TouchableOpacity onPress={() => moveToSingleChat(chat.chat_id)} style={tw`p-4 border-b border-gray-400`}>

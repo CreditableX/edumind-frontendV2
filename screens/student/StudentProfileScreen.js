@@ -1,10 +1,10 @@
-import { View, Text, Image } from 'react-native'
-import { Button } from 'react-native-paper'
+import { useNavigation } from '@react-navigation/core'
 import React from 'react'
+import { Image, Text, View } from 'react-native'
+import { Button } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import tw from 'twrnc'
 import useAuth from '../../hooks/useAuth'
-import { useNavigation } from '@react-navigation/core';
-import tw from 'twrnc';
 
 const StudentProfileScreen = () => {
     const { username, name, email, photoUrl } = useAuth();

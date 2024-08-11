@@ -1,7 +1,7 @@
-import StackNavigator from './StackNavigator';
 import { NavigationContainer } from '@react-navigation/native';
-import { MainProvider } from './hooks/mainProvider';
 import { PaperProvider } from "react-native-paper";
+import { MainProvider } from './hooks/mainProvider';
+import StackNavigator from './StackNavigator';
 
 
 export default function App() {

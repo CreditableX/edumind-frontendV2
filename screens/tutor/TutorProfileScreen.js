@@ -1,11 +1,11 @@
-import { View, Text, Image } from 'react-native'
-import { Button } from 'react-native-paper'
+import { useNavigation } from '@react-navigation/core'
 import React from 'react'
+import { Image, Text, View } from 'react-native'
+import { Button } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import useAuth from '../../hooks/useAuth'
-import { useNavigation } from '@react-navigation/core';
-import tw from 'twrnc';
+import tw from 'twrnc'
 import useChats from '../../hooks/chatProvider'
+import useAuth from '../../hooks/useAuth'
 
 const TutorProfileScreen = () => {
     const { username, name, email, subjects, rating, ratingCount, photoUrl } = useAuth();

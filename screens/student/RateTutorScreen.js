@@ -1,11 +1,11 @@
-import { Text, View, FlatList, TouchableOpacity, Image } from 'react-native'
-import React, { useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import React, { useEffect } from 'react'
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native'
+import { Button, Card, Title } from 'react-native-paper'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import tw from 'twrnc'
 import useChats from '../../hooks/chatProvider'
 import useAuth from '../../hooks/useAuth'
-import { Card, StyleSheet, Title, Button } from 'react-native-paper'
 
 
 const RateTutorScreen = () => {
@@ -23,6 +23,7 @@ const RateTutorScreen = () => {
     navigation.navigate("SingleChat");
   }
 
+  // chat card 
   const ChatItem = ({ chat }) => {
     return (
       <TouchableOpacity onPress={() => moveToSingleChat(chat.chat_id)} style={tw`p-4 border-b border-gray-400`}>
@@ -41,6 +42,8 @@ const RateTutorScreen = () => {
 
   return (
     <SafeAreaView style={tw`flex-1`}>
+
+      {/* Logic for displaying all chats */}
       <View style={tw`flex-1`}>
         {chats && chats.length > 0 ? (
           <FlatList
@@ -54,6 +57,7 @@ const RateTutorScreen = () => {
         )}
       </View>
 
+      {/* Return button */}
       <View style={tw`mt-4 w-full p-5`}>
         <Button title="Home" mode="contained" onPress={() => userType == 'student' ? navigation.navigate('StudentHome') : navigation.navigate('TutorHome')} style={tw`mb-1`}>
           Home

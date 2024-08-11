@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Alert, Image } from 'react-native';
-import { Button } from 'react-native-paper';
-import useAuth from '../../hooks/useAuth';
-import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';
 import * as ImagePicker from "expo-image-picker";
-import { compressImage } from '../../util/ImageProcessing';
+import React, { useState } from 'react';
+import { Alert, Image, Text, TextInput, View } from 'react-native';
+import { Button } from 'react-native-paper';
+import tw from 'twrnc';
 import { uploadToCloudinary } from '../../config/cloudinaryConfig';
+import useAuth from '../../hooks/useAuth';
+import { compressImage } from '../../util/ImageProcessing';
 
 const StudentSignupScreen = () => {
     const [username, setUsername] = useState('');
@@ -32,7 +32,6 @@ const StudentSignupScreen = () => {
     const handleSignup = async () => {
         if (image != '') {
             try {
-                // console.log("image " + image)
                 const compressedImage = await compressImage(image);
                 try {
                     const response = await uploadToCloudinary(compressedImage, "default");
@@ -65,7 +64,7 @@ const StudentSignupScreen = () => {
         }
     };
 
-
+    // choose image from gallery
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -79,6 +78,7 @@ const StudentSignupScreen = () => {
             setAspectRatio(ratio);
         }
     };
+    
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <View style={tw`flex-row items-center justify-between p-4`}>

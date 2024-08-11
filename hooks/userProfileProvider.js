@@ -1,8 +1,8 @@
 // context/userProfile/UserProfileProvider.js
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
-import useAuth from './useAuth';
 import { HEROKU_PATH } from '@env';
+import axios from 'axios';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import useAuth from './useAuth';
 
 const UserProfileContext = createContext();
 
@@ -16,6 +16,7 @@ export const UserProfileProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
+  // update on mount
   useEffect(() => {
     setUsernameState(username);
     setNameState(name);
@@ -114,8 +115,6 @@ export const UserProfileProvider = ({ children }) => {
       });
       if (response.status === 200) {
         console.log('updated password');
-      } else {
-        throw new Error('Update failed');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -136,8 +135,6 @@ export const UserProfileProvider = ({ children }) => {
       });
       if (response.status === 200) {
         console.log('updated password');
-      } else {
-        throw new Error('Update failed');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);

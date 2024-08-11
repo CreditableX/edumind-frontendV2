@@ -1,15 +1,15 @@
-import { View, Text, FlatList, Image, TextInput, Dimensions, Alert } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import { useNavigation } from '@react-navigation/core';
-import { useEffect, useState } from 'react';
-import useChats from '../hooks/chatProvider';
+import React, { useEffect, useState } from 'react';
+import { Alert, Dimensions, FlatList, Image, Text, TextInput, View } from 'react-native';
+import { Button, Card } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import tw from 'twrnc';
-import { Card, Button } from 'react-native-paper'
+import useChats from '../hooks/chatProvider';
 import useAuth from '../hooks/useAuth';
 
 const SingleChatScreen = () => {
-  const { singleChatId, getMessages, newMessage, messages, photoUrl, endChat, singleChatStudentName, singleChatTutorName, singleChatStudentPhoto, singleChatTutorPhoto } = useChats();
+  const { singleChatId, getMessages, newMessage, messages, photoUrl, endChat, singleChatStudentName, 
+    singleChatTutorName, singleChatStudentPhoto, singleChatTutorPhoto } = useChats();
   const { userId, userType } = useAuth();
   const [newMessageContent, setNewMessageContent] = useState('');
   const [rating, setRating] = useState(0);
@@ -21,7 +21,7 @@ const SingleChatScreen = () => {
       setNewMessageContent('');
       await getMessages();
     } catch (error) {
-      Alert.alert('message send error', error.message); // Display error message if msg creation fails
+      Alert.alert('message send error', error.message);
     }
   };
 
@@ -29,9 +29,9 @@ const SingleChatScreen = () => {
     try {
       console.log('ending chat with singlechatid ' + singleChatId);
       await endChat(singleChatId);
-      navigation.navigate('TutorHome'); // Go back to the browse questions screen
+      navigation.navigate('TutorHome');
     } catch (error) {
-      Alert.alert('End chat error', error.message); // Display error message if end chat fails
+      Alert.alert('End chat error', error.message); 
     }
   };
 
@@ -41,10 +41,10 @@ const SingleChatScreen = () => {
       if (1 <= rating && 5 >= rating) {
         await giveRating(rating);
         Alert.alert("Rating success");
-        navigation.navigate('StudentHome'); // Go back to the browse questions screen
+        navigation.navigate('StudentHome');
       }
     } catch (error) {
-      Alert.alert('Rating error', error.message); // Display error message if end chat fails
+      Alert.alert('Rating error', error.message);
     }
   }
 
@@ -59,7 +59,7 @@ const SingleChatScreen = () => {
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        await getMessages(); // assuming getMessages is an async function
+        await getMessages();
       } catch (error) {
         console.error('Error fetching messages:', error);
       }
@@ -70,7 +70,7 @@ const SingleChatScreen = () => {
 
   const MessageItem = ({ message }) => {
     // Determine if the message is sent by the current user or received
-    const isSentByCurrentUser = message.user_id === userId; // Replace with your logic
+    const isSentByCurrentUser = message.user_id === userId;
 
     return (
       <View style={[tw`m-2`, isSentByCurrentUser ? tw`self-end` : tw`self-start`]}>
@@ -90,8 +90,8 @@ const SingleChatScreen = () => {
         <Button
           icon="arrow-left"
           onPress={() => userType == 'student' ? navigation.navigate('StudentHome') : navigation.navigate('TutorHome')}
-          style={tw`rounded-l`} // Increase padding and use rounded corners
-          contentStyle={tw`py-2 px-6`} // Adjust padding inside the button
+          style={tw`rounded-l`}
+          contentStyle={tw`py-2 px-6`}
         />
         <Text style={tw`text-xl font-bold`}>{userType === 'student' ? singleChatTutorName : singleChatStudentName} </Text>
         <Image
@@ -105,8 +105,8 @@ const SingleChatScreen = () => {
           <Image
             source={{ uri: photoUrl }}
             style={{
-              width: screenWidth * 2 / 3,  // Set width to 1/3 of screen width
-              height: screenWidth * 2 / 3, // Set height to 1/3 of screen width (keeping aspect ratio square)
+              width: screenWidth * 2 / 3,
+              height: screenWidth * 2 / 3,
               resizeMode: 'contain'
             }}
           />

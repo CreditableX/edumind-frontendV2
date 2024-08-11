@@ -1,8 +1,8 @@
 // context/chats/ChatsProvider.js
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
-import useAuth from './useAuth';
 import { HEROKU_PATH } from '@env';
+import axios from 'axios';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import useAuth from './useAuth';
 
 const ChatsContext = createContext();
 
@@ -25,7 +25,6 @@ export const ChatsProvider = ({ children }) => {
 
   // Setting up Axios interceptor to include token in all requests
   useEffect(() => {
-
     console.log("Token in ChatsProvider:", token);
     const requestInterceptor = axios.interceptors.request.use(
       (config) => {
@@ -53,8 +52,6 @@ export const ChatsProvider = ({ children }) => {
       if (response.status === 200) {
         const filteredChats = response.data.filter(chat => !chat.completed);
         setChats(filteredChats);
-      } else {
-        throw new Error('Failed to fetch chats');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -73,8 +70,6 @@ export const ChatsProvider = ({ children }) => {
       if (response.status === 200) {
         const filteredChats = response.data.filter(chat => !chat.completed);
         setChats(filteredChats);
-      } else {
-        throw new Error('Failed to fetch chats');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -98,8 +93,6 @@ export const ChatsProvider = ({ children }) => {
       console.log(response)
       if (response.status === 201) {
         getChats(); // Refresh chats list
-      } else {
-        throw new Error('Chat creation failed');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -147,6 +140,7 @@ export const ChatsProvider = ({ children }) => {
 
     await getSingleChatDetails(chat.student_id, chat.tutor_id);
 
+    // console testing
     console.log("updated single chat id: " + id);
   }
 
@@ -156,11 +150,9 @@ export const ChatsProvider = ({ children }) => {
     try {
       const response = await axios.get(`${HEROKU_PATH}/subjects/${id}/topics`);
       if (response.status === 200) {
+        // console testing
         console.log("ok got topics");
-        // console.log(response.data);
         setSingleChatTopicList(response.data)
-      } else {
-        throw new Error('Failed to fetch topics');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -183,8 +175,6 @@ export const ChatsProvider = ({ children }) => {
       });
       if (response.status === 201) {
         console.log("message put success");
-      } else {
-        throw new Error('Failed to put messages');
       }
     } catch (err) {
       setError(err.response?.data?.message || err.message);
@@ -201,6 +191,8 @@ export const ChatsProvider = ({ children }) => {
 
     setLoading(true);
     setError(null);
+
+    // accept chat
     try {
       const response = await axios.post(`${HEROKU_PATH}/chats/${singleChatId}/accept`, {
       });
@@ -212,15 +204,13 @@ export const ChatsProvider = ({ children }) => {
       console.error('Question accept error:', err);
     }
 
-    console.log([parseInt(topics, 10)]);
-    const topicArray = [topics];
-
+    // assign topic
     try {
-      console.log("topicarray " + topicArray);
       const response = await axios.put(`${HEROKU_PATH}/chats/${singleChatId}/update-topics`, {
         topics: [parseInt(topics, 10)]
       });
       if (response.status === 200) {
+        // console testing
         console.log("topic success");
       }
     } catch (err) {
@@ -233,14 +223,14 @@ export const ChatsProvider = ({ children }) => {
 
   // list of subjects, updated when the app launches
   const updateSubjects = async () => {
-    console.log(HEROKU_PATH);
     setLoading(true);
     setError(null);
     try {
       const response = await axios.get(`${HEROKU_PATH}/subjects`, {
       });
       if (response.status === 200) {
-        console.log("subjects fetched " + response.data);
+        // console testing
+        console.log("subjects fetched");
         setSubjectList(response.data);
       }
     } catch (err) {
@@ -255,11 +245,15 @@ export const ChatsProvider = ({ children }) => {
   const getSingleChatDetails = async (student_id, tutor_id) => {
     setLoading(true);
     setError(null);
+    // console testing
     console.log("student + tutor " + student_id + " " + tutor_id);
+
+    // assign student to chat
     try {
       const response = await axios.get(`${HEROKU_PATH}/students/profile/${singleChatStudentId}`);
       console.log("here");
       if (response.status === 200) {
+        // console testing
         console.log("student fetched " + response.data.username);
         setSingleChatStudentName(response.data.username);
         setSingleChatStudentPhoto(response.data.photo_url);
@@ -271,10 +265,12 @@ export const ChatsProvider = ({ children }) => {
       setLoading(false);
     }
 
+    // assign tutor to chat if applicable
     if (singleChatTutorId) {
       try {
         const response = await axios.get(`${HEROKU_PATH}/tutors/profile/${singleChatTutorId}`);
         if (response.status === 200) {
+          // console testing
           console.log("tutor fetched " + response.data);
           setSingleChatTutorName(response.data.username);
           setSingleChatTutorPhoto(response.data.photo_url);
@@ -288,6 +284,7 @@ export const ChatsProvider = ({ children }) => {
     }
   }
 
+  // tutor ends a chat
   const endChat = async (id) => {
     setLoading(true);
     setError(null);
@@ -295,6 +292,7 @@ export const ChatsProvider = ({ children }) => {
       const response = await axios.put(`${HEROKU_PATH}/chats/${id}/complete`, {
       });
       if (response.status === 200) {
+        // console testing
         console.log(response.data);
       } 
     } catch (err) {
@@ -305,6 +303,7 @@ export const ChatsProvider = ({ children }) => {
     }
   }
 
+  // student list of chats to rate
   const getChatsToRate = async () => {
     setLoading(true);
     setError(null);
@@ -322,6 +321,7 @@ export const ChatsProvider = ({ children }) => {
     }
   };
 
+  // student rates 1 chat
   const giveRating = async (rating) => {
     setLoading(true);
     setError(null);

@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { View, Text, Alert, Image } from 'react-native';
-import { Button, TextInput } from "react-native-paper";
-import tw from 'twrnc';
-import useChats from '../../hooks/chatProvider';
-import DropDown from 'react-native-paper-dropdown';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from "expo-image-picker";
-import { compressImage } from '../../util/ImageProcessing';
+import React, { useState } from 'react';
+import { Alert, Image, Text, View } from 'react-native';
+import { Button, TextInput } from "react-native-paper";
+import DropDown from 'react-native-paper-dropdown';
+import tw from 'twrnc';
 import { uploadToCloudinary } from '../../config/cloudinaryConfig';
+import useChats from '../../hooks/chatProvider';
+import { compressImage } from '../../util/ImageProcessing';
 
 const NewChatScreen = () => {
     const [header, setHeader] = useState('');
@@ -18,6 +18,7 @@ const NewChatScreen = () => {
     const { newChat } = useChats();
     const navigation = useNavigation();
 
+    // hardcoded for now
     const topics = ["chemistry", "physics", "math"];
 
     const openTopicMenu = () => setTopicVisible(true);
@@ -27,7 +28,6 @@ const NewChatScreen = () => {
         // if an image is attached, then we call uploadToCloudinary function
         if (image != null) {
             try {
-                // console.log("image " + image)
                 const compressedImage = await compressImage(image);
                 try {
                     const response = await uploadToCloudinary(compressedImage, "default");
@@ -54,6 +54,7 @@ const NewChatScreen = () => {
         }
     };
 
+    // choose image from gallery
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
           mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -69,8 +70,9 @@ const NewChatScreen = () => {
       };
 
     return (
-
         <View style={tw`flex-1 justify-center items-center p-4`}>
+
+            {/* Back button */}
             <View style={tw`absolute top-10 left-0`}>
                 <Button
                     icon="arrow-left"
@@ -98,7 +100,7 @@ const NewChatScreen = () => {
             </View>
 
             <View style={tw`w-full mt-4`}>
-                {/* Dropdown for Subject */}
+                {/* Dropdown for subject */}
                 <DropDown
                     label="Topic"
                     mode="outlined"
@@ -113,6 +115,7 @@ const NewChatScreen = () => {
                     }))}
                 />
 
+                {/* Header input */}
                 <TextInput
                     label="Header"
                     value={header}
@@ -122,6 +125,8 @@ const NewChatScreen = () => {
                     numberOfLines={1}
                     maxLength={100}
                 />
+
+                {/* Message input */}
                 <TextInput
                     label="Message"
                     value={message}
@@ -133,6 +138,7 @@ const NewChatScreen = () => {
                 />
             </View>
 
+            {/* Submit button */}
             <View style={tw`mt-4 w-full`}>
                 <Button icon="upload" mode="contained" onPress={handleNewChat}>
                     Submit

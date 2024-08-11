@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { View, Text, ImageBackground, TouchableOpacity } from 'react-native';
-import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';
+import React, { useEffect } from 'react';
+import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
+import tw from 'twrnc';
 import useChats from '../hooks/chatProvider';
 
 const StartUpScreen = () => {
@@ -10,14 +10,14 @@ const StartUpScreen = () => {
 
     useEffect(() => {
         updateSubjects();
-    }, []); // Only run this effect on initial mount or if these values change
+    }, []);
 
     return (
         <View style={tw`flex-1 bg-black`}>
             <ImageBackground
                 resizeMode="contain"
                 style={tw`flex-1 justify-center items-center`}
-                source={require("../assets/edumind.png")} // change to edumind image when complete
+                source={require("../assets/edumind.png")}
             >
                 <TouchableOpacity style={[
                     tw`absolute bottom-40 w-52 bg-white p-4 rounded-2xl`,

@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState } from 'react'
-import axios from 'axios';
 import { HEROKU_PATH } from '@env';
+import axios from 'axios';
+import React, { createContext, useContext, useState } from 'react';
 
 const AuthContext = createContext({
 })
@@ -33,7 +33,7 @@ export const AuthProvider = ({ children }) => {
       });
 
       if (response.status === 201) {
-        // do nothing for nowr
+        // signup successful
         return true;
       }
     } catch (err) {
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
   // tutor signup
   const tutorSignup = async (username, password, name, subjects, email, photo_url) => {
     setLoading(true);
-    setError(null); // Clear any previous errors
+    setError(null);
 
     try {
       const response = await axios.post(`${HEROKU_PATH}/tutors/register`, {
@@ -90,8 +90,8 @@ export const AuthProvider = ({ children }) => {
         password
       });
       if (response.status === 200) {
+        // console testing
         console.log("login successful");
-        // Assuming the API returns user data upon successful login
         setUserType('student');
         setToken(response.data.token);
         setName(response.data.student.name);
@@ -99,11 +99,6 @@ export const AuthProvider = ({ children }) => {
         setEmail(response.data.student.email);
         setUserId(response.data.student.student_id);
         setPhotoUrl(response.data.student.photo_url);
-
-        console.log("login name is " + name);
-        console.log("login username is " + username);
-        console.log("login email is " + email);
-        console.log("usertpye is " + userType);
         return true;
       }
     } catch (err) {
@@ -118,7 +113,7 @@ export const AuthProvider = ({ children }) => {
   const tutorLogin = async (username, password) => {
     console.log(HEROKU_PATH);
     setLoading(true);
-    setError(null); // Clear any previous errors
+    setError(null);
     try {
       const response = await axios.post(`${HEROKU_PATH}/tutors/login`, {
         username,
@@ -126,6 +121,7 @@ export const AuthProvider = ({ children }) => {
       });
       if (response.status === 200) {
         setUserType('tutor');
+        // console testing
         console.log("login successful");
 
         setToken(response.data.token);
@@ -137,11 +133,6 @@ export const AuthProvider = ({ children }) => {
         setRating(response.data.tutor.rating);
         setRatingCount(response.data.tutor.rating_count);
         setPhotoUrl(response.data.tutor.photo_url);
-
-        console.log("usertpye is " + userType);
-        console.log("login name is " + name);
-        console.log("login username is " + username);
-        console.log("login email is " + email);
         return true;
       }
     } catch (err) {

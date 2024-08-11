@@ -28,7 +28,6 @@ export const uploadToCloudinary = (fileUri, uploadPreset, tag) => {
           console.error('Upload Error:', error);
           reject(error); // Reject the promise with the error
         } else {
-          // console.log('Upload Response:', response);
           resolve(response); // Resolve the promise with the response
         }
       },

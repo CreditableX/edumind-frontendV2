@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Alert } from 'react-native';
-import { Button } from 'react-native-paper'
-import useAuth from '../../hooks/useAuth';
-import tw from 'twrnc'
 import { useNavigation } from '@react-navigation/core';
+import React, { useEffect, useState } from 'react';
+import { Alert, Text, TextInput, View } from 'react-native';
+import { Button } from 'react-native-paper';
+import tw from 'twrnc';
+import useAuth from '../../hooks/useAuth';
 import useUserProfile from '../../hooks/userProfileProvider';
 
 const StudentChangeDetailsScreen = () => {
@@ -34,6 +34,7 @@ const StudentChangeDetailsScreen = () => {
 
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            {/* Fields for change */}
             <Text style={tw`mb-4 text-lg font-bold`}>Input the following details</Text>
             <TextInput
                 placeholder="Username"
@@ -55,6 +56,7 @@ const StudentChangeDetailsScreen = () => {
             />
 
             <View style={tw`flex-row justify-between w-4/5`}>
+                {/* Submit and back buttons */}
                 <View style={tw`flex-1 ml-2 mb-5`}>
                     <Button title="Submit" mode="contained" style={tw`mb-1`} onPress={() => handleUpdateDetails(newName, newUsername, newEmail)}> Submit </Button>
                     <Button title="Never Mind" mode="contained" style={tw`mb-1`}  onPress={() => navigation.navigate("StudentProfile")}> Never Mind </Button>
