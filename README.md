@@ -34,6 +34,7 @@ On startup, we have the following four screens:
   </tr>
 </table>
 
+</br>
 
 ### Shared Screens ###
 The following screens appear in both tutor and student views:
@@ -49,6 +50,8 @@ The following screens appear in both tutor and student views:
     </td>
   </tr>
 </table>
+
+</br>
 
 ### Tutor Screens ###
 Tutors have the following unique screens:
@@ -73,6 +76,8 @@ Tutors have the following unique screens:
     </td>
   </tr>
 </table>
+
+</br>
 
 ### Student Screens ###
 Students have the following unique screens:
