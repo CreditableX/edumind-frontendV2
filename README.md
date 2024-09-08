@@ -11,7 +11,6 @@ A typical use of the product is as follows:
 ## Screens ##
 ### Startup Screens ###
 On startup, we have the following four screens:  
-Startup | Login
 <table>
   <tr>
     <td style="text-align: center; width: 50%;">
@@ -21,6 +20,16 @@ Startup | Login
     <td style="text-align: center; width: 50%;">
       <p>Login Screen</p>
       <img src="readmeImages/Login.png" alt="Login" style="width: 100%;" />
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: center; width: 50%;">
+        <p>Student Signup Screen</p>
+        <img src="readmeImages/StudentSignup.png" alt="StudentSignup" style="width: 100%;" />
+    </td>
+    <td style="text-align: center; width: 50%;">
+        <p>Tutor Signup Screen</p>
+        <img src="readmeImages/TutorSignup.png" alt="TutorSignup" style="width: 100%;" />
     </td>
   </tr>
 </table>
