@@ -13,11 +13,19 @@ A typical use of the product is as follows:
 On startup, we have the following four screens:  
 Startup | Login
 <div style="display: flex; justify-content: space-between;">
-  <img src="readmeImages/Startup.png" alt="Startup" style="width: 30%;" />
-  <img src="readmeImages/Login.png" alt="Login" style="width: 30%;" />
+
+  <div style="text-align: center; width: 45%;">
+    <p>Startup Screen</p>
+    <img src="readmeImages/Startup.png" alt="Startup" style="width: 100%;" />
+  </div>
+
+  <div style="text-align: center; width: 45%;">
+    <p>Login Screen</p>
+    <img src="readmeImages/Login.png" alt="Login" style="width: 100%;" />
+  </div>
+
 </div>
-<img src="readmeImages/StudentSignup.png" alt="Student Signup" width="30%" />
-<img src="readmeImages/TutorSignup.png" alt="Tutor Signup" width="30%" />
+
 
 ### Shared Screens ###
 The following screens appear in both tutor and student views:
