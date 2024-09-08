@@ -77,10 +77,17 @@ Tutors have the following unique screens:
 ### Student Screens ###
 Students have the following unique screens:
 
-Home screen  
-<img src="readmeImages/StudentHomeScreen.png" alt="Student Home Screen" width="30%" />
-On the home screen, students can create chats, rate tutors for completed chats, as well as view recent chats.
-
-Create chat screen  
-<img src="readmeImages/StudentCreateChat.png" alt="Student Create Chat" width="30%" />
-Self-explanatory create chat screen
+<table>
+  <tr>
+    <td style="text-align: center; width: 50%;">
+      <p>Home Screen</p>
+      <img src="readmeImages/StudentHomeScreen.png" alt="Student Home Screen" style="width: 100%;" />
+      <p>On the home screen, students can create chats, rate tutors for completed chats, as well as view recent chats.</p>
+    </td>
+    <td style="text-align: center; width: 50%;">
+      <p>Create chat Screen</p>
+      <img src="readmeImages/StudentCreateChat.png" alt="Student Create Chat" style="width: 100%;" />
+      <p>Self-explanatory create chat screen</p>
+    </td>
+  </tr>
+</table>
