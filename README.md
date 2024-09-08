@@ -52,18 +52,27 @@ The following screens appear in both tutor and student views:
 
 ### Tutor Screens ###
 Tutors have the following unique screens:
-
-Home screen  
-<img src="readmeImages/TutorHomeScreen.png" alt="Tutor Home Screen" width="30%" />
-On the home screen, tutors can view available chats that are within the subjects that they have chosen and other tutors have not claimed.
-
-Profile screen  
-<img src="readmeImages/TutorProfile.png" alt="Tutor Profile" width="30%" />
-Profile screen shows tutors' basic details, as well as their experience and ratings.
-
-Accept chats screen  
-<img src="readmeImages/TutorChatAccept.png" alt="Tutor Chat Accept" width="30%" />
-Tutors are required to assign a topic to a chat before accepting.
+<table>
+  <tr>
+    <td style="text-align: center; width: 50%;">
+      <p>Home Screen</p>
+      <img src="readmeImages/TutorHomeScreen.png" alt="Tutor Home Screen" style="width: 100%;" />
+      <p>On the home screen, tutors can view available chats that are within the subjects that they have chosen and other tutors have not claimed.</p>
+    </td>
+    <td style="text-align: center; width: 50%;">
+      <p>Profile Screen</p>
+      <img src="readmeImages/TutorProfile.png" alt="Tutor Profile" style="width: 100%;" />
+      <p>Profile screen shows tutors' basic details, as well as their experience and ratings.</p>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: center; width: 50%;">
+        <p>Accept chats Screen</p>
+        <img src="readmeImages/TutorChatAccept.png" alt="Tutor Chat Accept" style="width: 100%;" />
+        <p>Tutors are required to assign a topic to a chat before accepting.</p>
+    </td>
+  </tr>
+</table>
 
 ### Student Screens ###
 Students have the following unique screens:
