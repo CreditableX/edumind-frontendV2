@@ -11,7 +11,7 @@ A typical use of the product is as follows:
 ## Screens ##
 ### Startup Screens ###
 On startup, we have the following four screens:
-![alt text](readmeImages/Startup.png)
+<img src="readmeImages/Startup.png" alt="Startup" width="50%" />
 ![alt text](readmeImages/Login.png)
 ![alt text](readmeImages/StudentSignup.png)
 ![alt text](readmeImages/TutorSignup.png)
