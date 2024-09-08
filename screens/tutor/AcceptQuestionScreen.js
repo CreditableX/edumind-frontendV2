@@ -14,6 +14,8 @@ const AcceptQuestionScreen = () => {
   const { userId } = useAuth();
   const [selectedTopic, setSelectedTopic] = useState('');
   const navigation = useNavigation();
+
+  const screenWidth = Dimensions.get('window').width;
   
   const handleAcceptChat = async () => {
     try {
