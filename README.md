@@ -16,12 +16,12 @@ Startup | Login
 
   <div style="text-align: center; width: 45%;">
     <p>Startup Screen</p>
-    <img src="readmeImages/Startup.png" alt="Startup" style="width: 100%;" />
+    <img src="readmeImages/Startup.png" alt="Startup" style="width: 50%;" />
   </div>
 
   <div style="text-align: center; width: 45%;">
     <p>Login Screen</p>
-    <img src="readmeImages/Login.png" alt="Login" style="width: 100%;" />
+    <img src="readmeImages/Login.png" alt="Login" style="width: 50%;" />
   </div>
 
 </div>
