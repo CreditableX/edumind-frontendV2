@@ -11,6 +11,7 @@ A typical use of the product is as follows:
 ## Screens ##
 ### Startup Screens ###
 On startup, we have the following four screens:  
+Startup | Login
 <div style="display: flex; justify-content: space-between;">
   <img src="readmeImages/Startup.png" alt="Startup" style="width: 30%;" />
   <img src="readmeImages/Login.png" alt="Login" style="width: 30%;" />
