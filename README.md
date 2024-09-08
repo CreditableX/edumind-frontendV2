@@ -12,40 +12,41 @@ A typical use of the product is as follows:
 ### Startup Screens ###
 On startup, we have the following four screens:
 <img src="readmeImages/Startup.png" alt="Startup" width="50%" />
-![alt text](readmeImages/Login.png)
-![alt text](readmeImages/StudentSignup.png)
-![alt text](readmeImages/TutorSignup.png)
+<img src="readmeImages/Login.png" alt="Login" width="50%" />
+<img src="readmeImages/StudentSignup.png" alt="Student Signup" width="50%" />
+<img src="readmeImages/TutorSignup.png" alt="Tutor Signup" width="50%" />
 
 ### Shared Screens ###
 The following screens appear in both tutor and student views:
+
 Chat Screen
-![alt text](readmeImages/ChatScreen.png)
+<img src="readmeImages/ChatScreen.png" alt="Chat Screen" width="50%" />
 
 Change details screen
-![alt text](readmeImages/ChangeDetails.png)
+<img src="readmeImages/ChangeDetails.png" alt="Change Details" width="50%" />
 
 ### Tutor Screens ###
 Tutors have the following unique screens:
 
 Home screen
-![alt text](readmeImages/TutorHomeScreen.png)
-On the home screen, tutors can view avaiable chats that are within the subjects that they have chosen and other tutors have not claimed.
+<img src="readmeImages/TutorHomeScreen.png" alt="Tutor Home Screen" width="50%" />
+On the home screen, tutors can view available chats that are within the subjects that they have chosen and other tutors have not claimed.
 
 Profile screen
-![alt text](readmeImages/TutorProfile.png)
+<img src="readmeImages/TutorProfile.png" alt="Tutor Profile" width="50%" />
 Profile screen shows tutors' basic details, as well as their experience and ratings.
 
 Accept chats screen
-![alt text](readmeImages/TutorChatAccept.png)
+<img src="readmeImages/TutorChatAccept.png" alt="Tutor Chat Accept" width="50%" />
 Tutors are required to assign a topic to a chat before accepting.
 
 ### Student Screens ###
 Students have the following unique screens:
 
 Home screen
-![alt text](readmeImages/StudentHomeScreen.png)
-On the home screen, students can create chats, rate tutors for completed chats as well as view recent chats.
+<img src="readmeImages/StudentHomeScreen.png" alt="Student Home Screen" width="50%" />
+On the home screen, students can create chats, rate tutors for completed chats, as well as view recent chats.
 
 Create chat screen
-![alt text](readmeImages/StudentCreateChat.png)
+<img src="readmeImages/StudentCreateChat.png" alt="Student Create Chat" width="50%" />
 Self-explanatory create chat screen
