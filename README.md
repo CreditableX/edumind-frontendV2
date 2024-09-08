@@ -12,19 +12,18 @@ A typical use of the product is as follows:
 ### Startup Screens ###
 On startup, we have the following four screens:  
 Startup | Login
-<div style="display: flex; justify-content: space-between;">
-
-  <div style="text-align: center; width: 30%;">
-    <p>Startup Screen</p>
-    <img src="readmeImages/Startup.png" alt="Startup" style="width: 30%;" />
-  </div>
-
-  <div style="text-align: center; width: 30%;">
-    <p>Login Screen</p>
-    <img src="readmeImages/Login.png" alt="Login" style="width: 30%;" />
-  </div>
-
-</div>
+<table>
+  <tr>
+    <td style="text-align: center; width: 50%;">
+      <p>Startup Screen</p>
+      <img src="readmeImages/Startup.png" alt="Startup" style="width: 100%;" />
+    </td>
+    <td style="text-align: center; width: 50%;">
+      <p>Login Screen</p>
+      <img src="readmeImages/Login.png" alt="Login" style="width: 100%;" />
+    </td>
+  </tr>
+</table>
 
 
 ### Shared Screens ###
