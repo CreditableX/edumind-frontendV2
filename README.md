@@ -37,12 +37,18 @@ On startup, we have the following four screens:
 
 ### Shared Screens ###
 The following screens appear in both tutor and student views:
-
-Chat Screen  
-<img src="readmeImages/ChatScreen.png" alt="Chat Screen" width="30%" />
-
-Change details screen  
-<img src="readmeImages/ChangeDetails.png" alt="Change Details" width="30%" />
+<table>
+  <tr>
+    <td style="text-align: center; width: 50%;">
+      <p>Chat Screen</p>
+      <img src="readmeImages/ChatScreen.png" alt="Chat Screen" style="width: 100%;" />
+    </td>
+    <td style="text-align: center; width: 50%;">
+      <p>Change details Screen</p>
+      <img src="readmeImages/ChangeDetails.png" alt="Change Details" style="width: 100%;" />
+    </td>
+  </tr>
+</table>
 
 ### Tutor Screens ###
 Tutors have the following unique screens:
